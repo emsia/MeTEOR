@@ -1,0 +1,162 @@
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+/*
+| -------------------------------------------------------------------------
+| URI ROUTING
+| -------------------------------------------------------------------------
+| This file lets you re-map URI requests to specific controller functions.
+|
+| Typically there is a one-to-one relationship between a URL string
+| and its corresponding controller class/method. The segments in a
+| URL normally follow this pattern:
+|
+|	example.com/class/method/id/
+|
+| In some instances, however, you may want to remap this relationship
+| so that a different class/function is called than the one
+| corresponding to the URL.
+|
+| Please see the user guide for complete details:
+|
+|	http://codeigniter.com/user_guide/general/routing.html
+|
+| -------------------------------------------------------------------------
+| RESERVED ROUTES
+| -------------------------------------------------------------------------
+|
+| There area two reserved routes:
+|
+|	$route['default_controller'] = 'welcome';
+|
+| This route indicates which controller class should be loaded if the
+| URI contains no data. In the above example, the "welcome" class
+| would be loaded.
+|
+|	$route['404_override'] = 'errors/page_missing';
+|
+| This route will tell the Router what URI segments to use if those provided
+| in the URL cannot be matched to a valid route.
+|
+*/
+$route['logout'] = 'pages/logout';
+$route['temp/forgotpw'] = 'temp/forgotpw';
+$route['temp/submit'] = 'temp/submit';
+$route['default_controller'] = 'pages';
+$route['forgot/(:any)'] = 'pages/checkpw/$1';
+//------------START ADMIN--------------------//
+
+$route['pages'] = 'pages';
+$route['pages/submit'] = 'pages/submit';
+$route['pages/login'] = 'pages/login';
+$route['pages/link/(:any)'] = 'pages/link/$1';
+$route['pages/courselist'] = 'pages/courselist';
+$route['pages/search_find'] = 'pages/search_find';
+$route['pages/login_enroll'] = 'pages/login_enroll';
+
+$route['pages/aboutus'] = 'pages/aboutus';
+$route['validate/(:any)'] = 'pages/validate/$1';
+
+$route['managers/status'] = 'managers/status';
+$route['managers/promote'] = 'managers/promote';
+$route['managers/create'] = 'managers/create';
+$route['managers/(:any)'] = 'managers/view/$1';
+$route['managers/search_results'] = 'managers/search_results';
+
+$route['course/add'] = 'course/add';
+$route['course/cancelledStatus'] = 'course/cancelledStatus';
+$route['course/cancelled_find/(:any)'] = 'course/cancelled_find/$1';
+$route['course/cancelled'] = 'course/cancelled';
+$route['course/search_cancelled'] = 'course/search_cancelled';
+$route['course/search_find'] = 'course/search_find';
+$route['course/cancelled/(:any)'] = 'course/seeCancelled/$1';
+$route['course/(:any)'] = 'course/process/$1';
+$route['course'] = 'course';
+
+$route['adminprofile'] = 'adminprofile';
+
+$route['adminhome/(:any)'] = 'adminhome/index';
+$route['adminhome'] = 'adminhome';
+
+$route['participant/(:any)'] = 'participant/view/$1';
+$route['participant'] = 'participant';
+$route['participant/search_users'] = 'participant/search_users';
+$route['participant/viewprofile'] = 'participant/viewprofile';
+
+
+$route['validation/search_results'] = 'validation/search_results';
+$route['validation/validate'] = 'validation/validate/$1/$2';
+$route['validation/payment'] = 'validation/payment/$1/$2';
+$route['validation/record'] = 'validation/record/$1/$2';
+$route['validation/template'] = 'validation/template';
+$route['validation/pkCash'] = 'validation/pkCash';
+$route['validation/pkBank'] = 'validation/pkBank';
+$route['validation'] = 'validation';
+
+$route['settings'] = 'adminsettings/index';
+$route['adminchange'] = 'adminsettings/changeform';
+$route['adminchangepword'] = 'adminsettings/forgotform';
+$route['adminsettings/change'] = 'adminsettings/change';
+$route['adminsettings/forgot'] = 'adminsettings/forgot';
+
+//------------END ADMIN--------------------//
+
+
+$route['managerprofile'] = 'managerprofile';
+
+$route['managerhome'] = 'managerhome';
+
+$route['managerparticipant/(:any)'] = 'managerparticipant/view/$1';
+$route['managerparticipant'] = 'managerparticipant';
+$route['managerparticipant/viewprofile'] = 'managerparticipant/viewprofile';
+
+$route['managervalidation/search_results'] = 'managervalidation/search_results';
+$route['managervalidation/validate'] = 'managervalidation/validate/$1/$2';
+$route['managervalidation/payment'] = 'managervalidation/payment/$1/$2';
+$route['managervalidation/record'] = 'managervalidation/record/$1/$2';
+$route['managervalidation/template'] = 'managervalidation/template';
+$route['managervalidation/pkCash'] = 'managervalidation/pkCash';
+$route['managervalidation/pkBank'] = 'managervalidation/pkBank';
+$route['managervalidation'] = 'managervalidation';
+
+$route['managercourse/add'] = 'managercourse/add';
+$route['managercourse/cancelledStatus'] = 'managercourse/cancelledStatus';
+$route['managercourse/cancelled_find/(:any)'] = 'managercourse/cancelled_find/$1';
+$route['managercourse/cancelled'] = 'managercourse/cancelled';
+$route['managercourse/search_cancelled'] = 'managercourse/search_cancelled';
+$route['managercourse/search_find'] = 'managercourse/search_find';
+$route['managercourse/cancelled/(:any)'] = 'managercourse/seeCancelled/$1';
+$route['managercourse/(:any)'] = 'managercourse/process/$1';
+$route['managercourse'] = 'managercourse';
+
+//------------START PARTICIPANT--------------------//
+
+$route['participantprofile/(:any)'] = 'participantprofile/view/$1';
+$route['participantprofile'] = 'participantprofile';
+
+$route['participantcourse/(:any)'] = 'participantcourse/view/$1';
+$route['participantcourse'] = 'participantcourse/index';
+
+
+$route['participantcourse/upcoming'] = 'participantcourse/upcoming';
+$route['participantcourse/completed'] = 'participantcourse/completed';
+$route['participantcourse/cancelled'] = 'participantcourse/cancelled';
+$route['participantcourse/search_reserved'] = 'participantcourse/search_reserved';
+$route['participantcourse/search_upcoming'] = 'participantcourse/search_upcoming';
+$route['participantcourse/search_completed'] = 'participantcourse/search_completed';
+$route['participantcourse/search_find'] = 'participantcourse/search_find';
+$route['participantcourse/reserved'] = 'participantcourse/reserved';
+$route['participantcourse/unreserved'] = 'participantcourse/unreserved';
+$route['participantcourse/unreservedres'] = 'participantcourse/unreservedres';
+$route['participantcourse/view'] = 'participantcourse/view';
+
+$route['participantsettings'] = 'participantsettings';
+$route['change'] = 'participantsettings/changeform';
+$route['changepword'] = 'participantsettings/forgotform';
+$route['participantsettings/forgot'] = 'participantsettings/forgot';
+$route['participantsettings/change'] = 'participantsettings/change';
+
+$route['participantuser/(:any)'] = 'participantuser/view/$1';
+$route['participantuser'] = 'participantuser';
+
+//------------END PARTICIPANT--------------------//
+/* End of file routes.php */
+/* Location: ./application/config/routes.php */

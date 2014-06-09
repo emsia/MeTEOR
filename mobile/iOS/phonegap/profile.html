@@ -1,0 +1,51 @@
+<!--THIS IS THE LOGIN PAGE, rename as index.html-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>   
+		<meta charset="utf-8">    
+		<meta name="viewport" content="width=device-width, initial-scale=1">   
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    	  
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+
+		<title>Basic mobile app</title>  
+		  
+		<!--START SCRIPTS-->
+			<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+			<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+			<script src="assets/js/jquery.cookie.js"></script>
+			<script src="assets/js/scripts.js"></script>			
+		<!--END SCRIPTS-->		
+
+		<!--START CSS-->
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />	
+		<link rel="stylesheet" href="assets/css/jquerymobile-up.css" />		
+		<!--END CSS-->		
+
+	</head>
+	<body data-theme="a">  
+		<div data-role="page" id="profile" data-theme="a"> 
+			<div data-role="header" >
+				<a data-rel="back" data-direction="reverse">Back</a>				
+				<h1>Profile</h1>
+				<a data-role='button' href='edit_profile.html' data-transition='slidedown'>Edit</a>
+			</div>
+			<div data-role="content"  id='user_profile'>  
+									
+			</div>
+			<div data-role="footer"  name='nav-footer' data-position="fixed">
+				<div data-role="navbar" id='navlist' data-theme="a"> 
+					<ul data-theme="a">
+						<li><a href="courses.html" class='i-courses' data-icon="custom" data-iconpos="top" data-transition='none'><small>Upcoming Courses</small></a></li>
+						<li><a href="my_courses_reserved.html" class="i-my_courses" data-icon="custom" data-iconpos="top" data-transition='none'><small>My Courses</small></a></li>	
+						<li><a href="profile.html" class="i-profile" data-icon="custom" data-iconpos="top" data-transition='none' disabled><small>Profile</small></a></li>
+					</ul>
+				</div>			
+			</div> 
+		</div>
+
+	</body>  
+</html>
+

@@ -1,0 +1,96 @@
+@CHARSET "ISO-8859-1";
+
+@page {
+  size: 11.7in 16.6in;
+  margin: 15px;
+  margin-header: 1mm; 
+  margin-footer: 1mm;
+}
+body{
+height: 100%; 
+width: 100%;
+}
+  
+div.date{
+padding-top: 2in; 
+font-family: arial;
+font-size: 12pt;
+margin-left: 6in;
+}
+
+#date{
+font-family: arial;
+text-align:center;
+font-size: 12pt;
+padding-bottom:.5in;
+}
+
+div.title{
+padding-top: .75in; 
+font-family: arial;
+text-align: center;
+font-size: 18pt;
+font-weight: bold;
+}
+
+div.content{
+padding-top: .5in; 
+font-family: arial;
+font-size: 12pt;
+margin-left: 1in;
+margin-right: 1in;
+}
+
+div.signature1{
+position: absolute;
+padding-top: 2in; 
+text-align: center;
+}
+
+div.signature2{
+position: absolute;
+padding-top: 1.5in; 
+text-align: center;
+}
+
+div.output{
+font-family: arial;
+font-size: 12pt;
+text-align: center;
+}
+
+p.certcontent{
+text-align:justify;
+}
+
+.name{
+font-family: arial;
+font-size: 13pt;
+font-weight: bold;
+}
+
+.position{
+font-family: arial;
+font-size: 12pt;
+}
+
+img.imgsignature{
+	width: 1.7in;
+	height: .4in;
+}
+
+img.footer{
+width: 8.5in;
+height: 1in;
+padding-bottom: -42px;
+}
+
+img.imgsignature1{
+	width: 2.3in;
+	height: .6in;
+}
+
+img.imgsignature2{
+	width: 2.3in;
+	height: .6in;
+}

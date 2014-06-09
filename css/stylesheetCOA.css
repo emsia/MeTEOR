@@ -1,0 +1,125 @@
+@CHARSET "ISO-8859-1";
+
+
+body{
+height: 100%; 
+width: 100%;
+}
+  
+div.date{
+font-family: arial;
+font-size: 10pt;
+margin-left: 5in;
+}
+
+div.head{
+font-family: arial;
+text-align: center;
+font-size: 12pt;
+font-weight: bold;
+}
+
+div.title{
+font-family: arial;
+text-align: center;
+font-size: 13pt;
+font-weight: bold;
+color: red;
+}
+
+div.title2{
+font-family: arial;
+text-align: center;
+font-size: 10pt;
+font-weight: bold;
+color: red;
+}
+
+div.title3{
+font-family: arial;
+text-align: center;
+font-size: 15pt;
+font-weight: bold;
+color: red;
+padding-top: 20px;
+font-style: underline;
+}
+
+div.lastWords{
+font-family: arial;
+text-align: center;
+font-size: 12pt;	
+}
+
+div.content{
+font-family: arial;
+font-size: 10pt;
+font-weight: bold;
+margin-left: 0.5in;
+margin-right: 0.5in;
+padding-bottom: 1in;
+}
+
+div.signature{
+position: absolute;
+padding-top: 2in; 
+right:1in;
+text-align: center;
+}
+
+div.output{
+font-family: arial;
+font-size: 12pt;
+text-align: center;
+}
+
+p.certcontent{
+text-align:justify;
+}
+
+.name{
+font-family: arial;
+font-size: 13pt;
+font-weight: bold;
+}
+
+.position{
+font-family: arial;
+font-size: 12pt;
+}
+
+img.imgsignature{
+	width: 1.7in;
+	height: .4in;
+}
+
+img.footer{
+opacity: 0.5;
+width: 11in;
+height: 1in;
+padding-bottom: -42px;
+}
+
+img.header{
+width: 8in;
+height: 2in;
+margin-left: 1.5in;
+position: absolute;
+}
+
+img.header2{
+width: 1.25in;
+height: 1.25in;
+margin-left:2.5in;
+}
+
+.bg{
+	
+}	
+
+img.headNew{
+	padding-top: -20px;
+	width: 11in;
+	height: 2in;
+	position: absolute;
+}

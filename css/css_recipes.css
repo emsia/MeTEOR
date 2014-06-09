@@ -1,0 +1,32 @@
+#dhtmltooltip
+{
+    line-height: 0px;	
+	border: 2px solid #FFFFFF;	
+    border-width: 2px;   
+    color:#333; 
+    border-color:#CFB57C;
+    padding:20px;
+    border-radius:6px; /*Rounded corners. N/A for IE 8 and below.*/
+	visibility: hidden;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif, Verdana, Arial;
+	font-size: 12px;
+	position: absolute;
+	width: 150px;
+	z-index: 1050;
+	background-position: left top;
+}
+
+#dhtmltooltip:after /* triangle decoration */
+{
+	width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #CFB57C;
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    margin-left: -10px;
+}

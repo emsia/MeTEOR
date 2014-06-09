@@ -1,0 +1,110 @@
+<head>
+<style>
+	th{
+		color:white; background-color: #003000;
+	}
+	
+	table{
+		border: 2px solid #666633;
+	}
+</style>
+</head>
+<body>
+<img src="<?php echo base_url(); ?>css/images/LOGOHeader.png" class="header" />
+	<div class="title"><?php echo "List of Participants:<br/>".$cert; ?></div>
+	<div class="title2">
+		<?php 
+			$temp = date('F j\, Y', strtotime($starting1));
+			$temp1 = date('F j\, Y', strtotime($ending1));
+			if( $starting1 == $ending1 ) $message = "On ".$temp;
+			else $message = "From: ".$temp." To: ".$temp1;
+		echo $message;?></div>
+	<?php echo "<div class='date'>(".$currDate.")</div>";?>
+	<div class="content">
+		<p class="certcontent">
+			<table class="viewtable" border="0">	
+			<thead>
+				<tr>
+					<th style="width: 21%"><div>Last Name</div></th>
+					<th style="width: 21%"><div>First Name</div></th>
+					<th style="width: 21%"><div>Email</div></th>
+					<th style="width: 21%"><div>Status</div></th>
+					<th style="width: 16%"><div>Payment</div></th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php for( $i = 0; $i < $count; $i++ ): 
+					$cancelledOrNot = 1;
+					$set = 0;
+					
+					for( $j = 0; $j < $decount; $j++ ){
+						if( $tag[$j] == $user_id[$i] ){
+							$cancelledOrNot = 0;
+							break;
+						}
+					}	
+				?>
+				<div><a href="#">				
+				<tr class="lin">
+				<?php if( $cancelledOrNot ){?>
+						<?php	
+							$var = 0; $var2 = 0;
+							$query = $this->db->get_where('users', array('role' => 2));
+							$array2 = $query->row_array();
+							
+							if( !empty($array2['id']) ){
+								$set = 1;
+								$query1 = $this->db->get_where('cancelled', array('user_id' => $user_id[$i], 'course_id' => $course_id));
+								$array1 = $query1->row_array();
+								
+								if( !empty($array1['id']) && $array1['refunded'] == 1 ){
+									echo "<center class='refund'>For Refund</center>";	
+									$var = -1;
+								}	
+								else{
+									$query = $this->db->get_where('payment', array( 'course_id' => $course_id, 'user_id' => $user_id[$i]));
+									$array3 = $query->row_array();
+							
+									if( !empty($array3['id']) )
+										$var = 1;
+									else if( $cancelledOrNot )
+										$var = 0;
+									if( !empty($array3['remarks'])	&& $array3['remarks'] == "free" )
+										$var2 = 1;
+								}	
+							}
+				}?>
+				<td class="dataf"><a href="#"><div><center><?php echo $lastname[$i];?></center></div></a></td>
+				<td class="dataf"><a href="#"><div><center><?php echo $firstname[$i];?></center></div></a></td>
+				<td class="dataf"><a href="#"><div><center><?php echo $username[$i];?> <center></div></a></td>
+				<td class="dataf">
+					<?php 											
+						if( $set ){
+							if( $var == -1 )
+								echo "<center class='refund'>For Refund</center>";	
+							else{													
+								if( $var == 1 )
+									echo "<center>Validated</center>";
+								else if( $var == 0 )
+									echo "<center>For Validation</center>";
+								else{
+									echo "<center>FREE RESERVATIONS</center>";
+								}
+							}	
+						}
+					?>
+				</td>
+				<td class="dataf">
+					<?php 	
+						if( $var == 0 ) echo "<center>Not Yet Paid</center>";	
+						else if( $var2 ) echo "<center class='refund'>Free</center>";	
+						else echo "<center>Regular</center>";
+					?>
+				</td>										
+				</tr></a></div>
+				<?php endfor ?>	
+			</tbody>
+			</table>					
+		</p>
+	</div>	
+</body>

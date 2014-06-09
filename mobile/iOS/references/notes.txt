@@ -1,0 +1,6 @@
+offline mode
+
+-check if cookie present/user logged in already
+
+features
+-allow viewing of one's own classes

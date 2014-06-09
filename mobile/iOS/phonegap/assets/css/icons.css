@@ -1,0 +1,16 @@
+#courses .ui-icon {
+background:  url("../img/icons/104-index-cards.png") 50% 50% no-repeat;
+background-size: 22px 22px;
+}
+#logout .ui-icon {
+background:  url("../img/icons/63-runner.png") 50% 50% no-repeat;
+background-size: 22px 22px;
+}
+#edit .ui-icon {
+background:  url("../img/icons/187-pencil.png") 50% 50% no-repeat;
+background-size: 18px 23px;
+}
+#profile .ui-icon {
+background:  url("../img/icons/111-user.png") 50% 50% no-repeat;
+background-size: 20px 22px;
+}

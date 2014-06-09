@@ -1,0 +1,56 @@
+<!--THIS IS THE LOGIN PAGE, rename as index.html-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>   
+		<meta charset="utf-8">    
+		<meta name="viewport" content="width=device-width, initial-scale=1">   
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    	  
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+
+		<title>Basic mobile app</title>  
+		  
+		<!--START SCRIPTS-->
+			<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+			<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+			<script src="assets/js/jquery.cookie.js"></script>
+			<script src="assets/js/scripts.js"></script>			
+ 			
+		<!--END SCRIPTS-->		
+
+		<!--START CSS-->
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />	
+		<link rel="stylesheet" href="assets/css/jquerymobile-up.min.css" />
+		<link rel="stylesheet" href="assets/css/jquerymobile-up.css" />		
+		<!--END CSS-->		
+
+	</head>
+	<body data-theme="a">  
+	
+		<div data-role="page" id="my_courses_paid" data-theme="a"> 
+			<div data-role="header"  data-position='fixed'>
+				<h1>My Courses</h1>
+				<a data-rel="back" data-direction='reverse'>Back</a>
+			</div>		
+			<div data-role="content" >  
+				<div class='ui-grid-a'>
+					<div class='ui-block-a'><a href='my_courses_reserved.html'  style='text-decoration:none; color:white;' data-transition='none'><div class='ui-bar tab-bar'><b>Reserved</b></div></a></div>
+					<div class='ui-block-b'><a href='#' style='text-decoration:none; color:white;'><div class='ui-bar tab-bar  tab-bar-active'><b>Paid</b></div></a></div>
+				</div>
+				<div style='margin-top:30px;' id='paid_course_container'></div>
+			</div>  		
+			<div data-role="footer"  name='nav-footer' data-position="fixed">
+				<div data-role="navbar" id='navlist' data-theme="a"> 
+					<ul data-theme="a">
+						<li><a href="courses.html" class='i-courses' data-icon="custom" data-iconpos="top" data-transition='none'><small>Upcoming Courses</small></a></li>
+						<li><a href="my_courses_reserved.html" class="i-my_courses" data-icon="custom" data-iconpos="top" data-transition='none' disabled><small>My Courses</small></a></li>	
+						<li><a href="profile.html" class="i-profile" data-icon="custom" data-iconpos="top" data-transition='none'><small>Profile</small></a></li>
+					</ul>
+				</div>			
+			</div>
+		</div> 
+	</body>  
+</html>
+

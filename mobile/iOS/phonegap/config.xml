@@ -1,0 +1,31 @@
+<xml version="1.0" encoding="UTF-8" >
+    <widget xmlns = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "com.phonegap.example"
+        versionCode="10" 
+        version   = "2.5.0">
+
+    <!-- versionCode is optional and Android only -->
+
+		<name>MeTEOR</name>
+
+		<description>	
+			The mobile version of MeTEOR for participants.
+		</description>
+
+		<author>
+			Daryll Panaligan
+		</author>
+		
+		<icon src="assets/img/app_icons/icon.png" gap:platform="ios" width="57" height="57" />
+
+	</widget>
+	
+	<access origin="http://127.0.0.1*"/> <!-- allow local pages -->
+
+	<access origin="https://meteor.upsitf.org" />
+
+	<access origin="https://meteor.upsitf.org" subdomains="true" />
+
+	<access origin=".*"/>
+</xml>

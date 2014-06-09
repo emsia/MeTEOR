@@ -1,0 +1,28 @@
+.viewtableA{
+	width: 800px;
+	font: 14px NegotiateFree;
+	border-collapse: collapse;
+	display: none;
+}
+
+.viewtableA tr{
+	padding: 3px;
+	padding-bottom: 2px;
+	display: none;
+}
+
+.buttonf2{
+	width: 5%;
+	background-color: white;
+	border: none;
+}
+
+.addf2{
+	border: 2px solid #cccc99;
+	border-radius: 5px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-o-border-radius: 5px;
+	width: 90%;	
+	margin-left: 3%;
+}
