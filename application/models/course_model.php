@@ -460,7 +460,7 @@ class course_model extends CI_Model {
 			'description'	=> $_POST['description'],
 			'startTime'		=> date("H:i:s", strtotime($_POST['startTime'])), //$time = date("H:i:s", strtotime($_POST['startTime'][$j]));
 			'endTime'		=> date("H:i:s", strtotime($_POST['endTime'])),
-			'attendees'		=> $_POST['attendess'],
+			'attendees'		=> $_POST['attendees'],
 			'landTranspo'	=> $_POST['transport'],
 			'landRemarks'	=> $_POST['transpoRemarks'],
 			'food'			=> $_POST['food'],
@@ -504,11 +504,16 @@ class course_model extends CI_Model {
 		$this->db->delete('pending', array('email' => $email , 'course_id' => $temp_id) );	
 	}
 
-	public function set_cancelledStatus()
+	public function set_cancelledStatus($tempId)
 	{
 		$this->load->helper('url');
 		$slug = url_title($this->input->post('title'), 'dash', TRUE);
 				
+		if($tempId){
+			$this->db->where('course_id', $tempId);
+			$this->db->delete('pending');
+		}
+
 		$query = $this->db->get_where('cancelled', array('course_id' => $_POST['course_id']));
 		$array = $query->row_array();
 		

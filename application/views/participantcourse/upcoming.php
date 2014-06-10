@@ -168,11 +168,14 @@
 										
 				$query3 = $this->db->get_where('cancelled', array('course_id' => $rowAns['id']) );
 				$array = $query3->row_array();	
+
+				$query4 = $this->db->get_where('dissolved', array('course_id' => $rowAns['id']) );
+				$array4 = $query4->row_array();
 				
 				$queryCash = $this->db->get_where('payment', array('course_id' => $rowAns['id'], 'user_id' => $userid) );
 				$arrayCash = $queryCash->row_array();	
 				
-				if( empty( $arrayCash['id'] ) && (empty( $array['id'] ) && empty( $array2['id'] )) && ( $rowAns['start'] > $date && $rowAns['end'] > $date ) ){
+				if( empty( $arrayCash['id'] ) && empty( $array4['id'])  && (empty( $array['id'] ) && empty( $array2['id'] )) && ( $rowAns['start'] > $date && $rowAns['end'] > $date ) ){
 					if( !$rowAns['tempId'] ){
 						$true = 1;
 						break;

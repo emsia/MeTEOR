@@ -78,16 +78,15 @@
 							<td class="dataf"><center><?php echo $firstname[$i]?></center></td>
 							<td class="dataf"><center><?php echo $middlename[$i]?></center></td>
 							<td class="dataf"><center><?php echo $username[$i]?></center></td>
-							<td class="dataf"><center>
+							<td>
 								<?php			
-									if( $setRes == 0 && $setCancelled == 0 ) echo "<center><span class='badge badge-error'>For Validation and Has Refunded Course(s)</span></center>";
+									if( $setRes == 0 && $setCancelled == 0 ) echo "<center><span class='badge badge-error'>For Validation </span><br style='margin-bottom: 5px' /><span class='badge badge-error'> Has Refunded Course(s)</span></center>";
 									else if( $setRes == 0 ) echo "<center><span class='badge badge-info'>For Validation</span></center>";
-									else if( ( $setPaid == 0 ) && $setCancelled == 0 ) echo "<center><span class='badge badge-error'>Validated and Has Refunded Course(s)</span></center>";					
+									else if( ( $setPaid == 0 ) && $setCancelled == 0 ) echo "<center><span class='badge badge-success'>Validated </span><br style='margin-bottom: 5px' /><span class='badge badge-error'> Has Refunded Course(s)</span></center>";					
 									else if( $setCancelled == 0 ) echo "<center><span class='badge badge-error'>Has Refunded Course(s)</span></center>";
 									else if( ($setRes && $setCancelled) && ( $setPaid ) ) echo "<center><span class='badge badge-warning'>Has No Course(s) Yet</span></center>";
 									else echo "<center><span class='badge badge-success'>Validated</span></center>";
 								?>
-								</center>
 							</td>
 						</tr>
 					<?php }?>

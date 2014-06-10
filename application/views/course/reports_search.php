@@ -125,7 +125,7 @@
 							<div>
 							<tr class='linka'>
 
-							<?php if( !$true && !$deptTrue ){ $direction .= '/0'; ?>
+							<?php if( !$deptTrue ){ $direction .= '/0'; ?>
 								<td class="dataf"><a href="<?php echo $direction; ?>"><center><div><?php echo $name[$i]; ?></div></center></a></td>
 								<td class="dataf"><center><div><?php echo $description[$i]; ?></div></center></td>
 								<td class="dataf"><center><div><?php echo $var1; ?></div></center></td>

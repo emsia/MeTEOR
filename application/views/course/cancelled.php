@@ -42,6 +42,9 @@
 							else $query1 = $this->db->get_where('courses', array('id' => $arrayDis['course_id']));
 							$array = $query1->row_array();
 							
+							$paid_list = $this->db->get_where( 'payment', array('course_id' => $row['id']));
+							$paid_list = $paid_list->result_array();
+
 							if( !empty( $array1['id'] ) ) $var = strtotime($array1['date']);
 							else $var = strtotime($arrayDis['date']);
 						?>		

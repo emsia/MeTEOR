@@ -308,7 +308,7 @@
 							</td>
 
 							<?php if(!$num){ 
-								if( $confirmedCount[$i] ) $place = base_url().'index.php/course/seeRequest/'.$id[$i]."/".$num."/".$tag;
+								if( $confirmedCount[$i] || $pendingCount[$i] ) $place = base_url().'index.php/course/seeRequest/'.$id[$i]."/".$num."/".$tag;
 								else $place = "#";
 							?>													
 								<?php if( $tag ){ ?>	
@@ -327,7 +327,7 @@
 									<button style='padding: 5px'; data-toggle="tooltip" data-trigger="hover" data-placement="top" title data-original-title="Already Approved" onMouseOut="hideddrivetip()" class='btn btn-success' type="button"><i class="glyphicon glyphicon-ok"></i></button>		
 									</td>
 							<?php } }else{
-								if( $confirmedCount[$i] ) $place = base_url().'index.php/managercourse/seeRequest/'.$id[$i]."/".$num."/".$tag;
+								if( $confirmedCount[$i] || $pendingCount[$i] ) $place = base_url().'index.php/managercourse/seeRequest/'.$id[$i]."/".$num."/".$tag;
 								else $place = "#";
 								if( $tag ){
 							?>

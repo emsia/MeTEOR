@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.12
+-- version 3.5.2.2
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jun 10, 2014 at 02:17 AM
--- Server version: 5.6.16
--- PHP Version: 5.5.11
+-- Host: 127.0.0.1
+-- Generation Time: Jun 10, 2014 at 05:53 PM
+-- Server version: 5.5.27
+-- PHP Version: 5.4.7
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -186,14 +186,17 @@ CREATE TABLE IF NOT EXISTS `cancelled` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `course_id` (`course_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `cancelled`
 --
 
 INSERT INTO `cancelled` (`id`, `user_id`, `course_id`, `refunded`, `date`, `untag`) VALUES
-(1, 248, 18, 1, '2014-06-05 08:54:01', 1);
+(1, 248, 18, 1, '2014-06-05 08:54:01', 1),
+(2, 1, 23, -1, '2014-06-10 22:02:30', 0),
+(3, 1, 24, -1, '2014-06-10 22:17:50', 0),
+(4, 1, 25, -1, '2014-06-10 22:31:38', 0);
 
 -- --------------------------------------------------------
 
@@ -356,7 +359,7 @@ CREATE TABLE IF NOT EXISTS `courses` (
   `accomodationRemarks` text,
   `accomodation` int(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `courses`
@@ -373,7 +376,10 @@ INSERT INTO `courses` (`id`, `name`, `description`, `cost`, `start`, `end`, `ava
 (16, 'Data Mining', 'Mining many data', 0, '2014-05-25', '2014-05-31', 10, 0, 0, 'AS 101', '09:00:00', 'Students from UP', 5000, 3000, 0, 8000, '05:00:00', 0, 'Jeep -- ikot', 'Naglakad lang kami', 'To excavate data in places.', 'All are cheese.', 'None', 0),
 (18, 'CS 199', 'Thesis', 1500, '2014-05-01', '2014-12-31', 3, 0, 1, 'DCS', '09:00:00', 'Students', 0, 0, 0, 0, '05:00:00', 0, 'KKB', 'Lakad lang.', 'To publish a paper', 'KKB', 'KKB', 0),
 (19, 'Only', 'Test Only', 0, '2014-05-29', '2014-05-30', 2, 0, 0, 'DCS', '04:00:00', '', 0, 0, 0, 0, '05:00:00', 0, 'wala', 'wala', 'Basta', 'wala', 'wala', 0),
-(22, 'CS 195', 'Apprenticeship', 1500, '2014-06-01', '2014-07-31', 3, 0, 1, 'DCS', '09:00:00', 'students', 1000, 2000, 0, 3000, '17:00:00', 0, 'Galing Bulacan', 'Lakad lang kami', 'To gain expereience', 'Eat all you can', 'DCS lang kami', 0);
+(22, 'CS 195', 'Apprenticeship', 1500, '2014-06-11', '2014-07-31', 3, 1, 0, 'DCS', '09:00:00', 'students', 1000, 2000, 0, 3000, '17:00:00', 0, 'Galing Bulacan', 'Lakad lang kami', 'To gain expereience', 'Eat all you can', 'DCS lang kami', 0),
+(23, 'Ito ay test laman', 'fsdfsdf', 0, '2014-06-11', '2014-06-12', 2, 0, 0, 'TBA', '09:00:00', '', 0, 0, 0, 0, '16:00:00', 7, 'dsad', 'dsad', 'Wala', 'asdas', 'dsad', 0),
+(24, 'Testing lang ito.', 'fsdfsdf', 0, '2014-06-11', '2014-06-12', 2, 0, 0, 'TBA', '09:00:00', 'students', 0, 0, 0, 0, '16:00:00', 7, 'xzx', 'xzx', 'zxczc', 'xzx', 'xz', 0),
+(25, 'Test Only', 'fsdfsdf', 0, '2014-06-11', '2014-06-12', 2, 0, 0, 'TBA', '09:00:00', 'fsdf', 0, 0, 0, 0, '16:00:00', 7, 'asd', 'sadasd', 'dsad', 'asdas', 'adasd', 0);
 
 -- --------------------------------------------------------
 
@@ -429,7 +435,17 @@ CREATE TABLE IF NOT EXISTS `dissolved` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `course_id` (`course_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `dissolved`
+--
+
+INSERT INTO `dissolved` (`id`, `user_id`, `course_id`, `date`) VALUES
+(1, 1, 23, '2014-06-10 22:02:30'),
+(2, 1, 24, '2014-06-10 22:17:50'),
+(3, 1, 25, '2014-06-10 22:31:38'),
+(5, 248, 22, '2014-06-10 23:48:28');
 
 -- --------------------------------------------------------
 
@@ -665,74 +681,73 @@ CREATE TABLE IF NOT EXISTS `payment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `amount` int(11) NOT NULL,
   `remarks` varchar(255) DEFAULT NULL,
-  `ornumber` int(11) NOT NULL,
+  `ornumber` varchar(55) NOT NULL,
   `user_id` int(11) NOT NULL,
   `course_id` int(11) NOT NULL,
   `date` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `course_id` (`course_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=82 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=83 ;
 
 --
 -- Dumping data for table `payment`
 --
 
 INSERT INTO `payment` (`id`, `amount`, `remarks`, `ornumber`, `user_id`, `course_id`, `date`) VALUES
-(1, 500, NULL, 8, 248, 12, '2014-01-09 00:00:00'),
-(4, 0, 'free', 0, 253, 7, '2014-01-09 11:42:02'),
-(5, 0, 'free', 0, 254, 7, '2014-01-09 13:03:25'),
-(6, 0, 'free', 0, 255, 7, '2014-01-09 13:30:48'),
-(7, 0, 'free', 0, 256, 7, '2014-01-09 14:10:34'),
-(8, 0, NULL, 0, 251, 7, '2014-01-09 00:00:00'),
-(14, 0, 'free', 0, 259, 8, '2014-01-13 12:00:16'),
-(19, 0, 'free', 0, 261, 8, '2014-01-13 13:25:14'),
-(21, 0, 'free', 0, 270, 8, '2014-01-13 13:25:32'),
-(22, 0, 'free', 0, 265, 8, '2014-01-13 13:25:50'),
-(25, 0, 'free', 0, 263, 8, '2014-01-13 13:27:20'),
-(26, 0, 'free', 0, 274, 8, '2014-01-13 13:29:28'),
-(28, 0, 'free', 0, 278, 8, '2014-01-13 13:32:41'),
-(29, 0, 'free', 0, 269, 8, '2014-01-13 13:33:33'),
-(31, 0, 'free', 0, 281, 8, '2014-01-13 13:36:22'),
-(32, 0, 'free', 0, 279, 8, '2014-01-13 13:36:27'),
-(33, 0, 'free', 0, 275, 8, '2014-01-13 13:38:41'),
-(34, 0, 'free', 0, 276, 8, '2014-01-13 13:42:02'),
-(35, 0, 'free', 0, 271, 8, '2014-01-13 13:43:29'),
-(36, 0, 'free', 0, 283, 8, '2014-01-13 13:51:04'),
-(38, 0, 'free', 0, 282, 8, '2014-01-13 14:00:20'),
-(39, 0, 'free', 0, 284, 8, '2014-01-13 14:09:06'),
-(40, 0, 'free', 0, 267, 8, '2014-01-13 15:41:54'),
-(45, 0, 'free', 0, 266, 8, '2014-01-13 15:46:48'),
-(46, 0, 'free', 0, 287, 8, '2014-01-13 15:52:48'),
-(47, 0, 'free', 0, 288, 8, '2014-01-13 22:28:13'),
-(48, 0, 'free', 0, 289, 8, '2014-01-14 06:51:23'),
-(49, 0, 'free', 0, 273, 8, '2014-01-14 08:31:12'),
-(50, 0, 'free', 0, 262, 8, '2014-01-14 09:04:40'),
-(51, 0, 'free', 0, 260, 8, '2014-01-14 09:16:24'),
-(54, 0, 'free', 0, 290, 8, '2014-01-15 09:13:17'),
-(58, 0, 'free', 0, 291, 8, '2014-01-16 10:33:38'),
-(59, 0, 'free', 0, 249, 14, '2014-02-03 11:41:17'),
-(60, 0, 'free', 0, 293, 14, '2014-02-03 11:45:50'),
-(61, 0, 'free', 0, 294, 14, '2014-02-03 11:58:46'),
-(62, 0, 'free', 0, 251, 14, '2014-02-03 13:03:58'),
-(63, 0, 'free', 0, 296, 14, '2014-02-03 13:04:17'),
-(64, 0, 'free', 0, 254, 14, '2014-02-03 13:05:04'),
-(65, 0, 'free', 0, 255, 14, '2014-02-03 13:05:48'),
-(66, 0, 'free', 0, 295, 14, '2014-02-03 15:58:58'),
-(67, 0, 'free', 0, 297, 13, '2014-02-03 16:09:52'),
-(68, 0, 'free', 0, 255, 13, '2014-02-03 16:28:24'),
-(69, 0, 'free', 0, 298, 13, '2014-02-03 16:31:59'),
-(70, 0, 'free', 0, 300, 13, '2014-02-03 21:01:01'),
-(71, 0, 'free', 0, 301, 13, '2014-02-03 22:45:05'),
-(72, 0, 'free', 0, 302, 14, '2014-02-03 23:40:14'),
-(73, 0, 'free', 0, 303, 14, '2014-02-04 09:22:42'),
-(74, 0, 'free', 0, 305, 14, '2014-02-04 13:43:29'),
-(75, 0, 'free', 0, 306, 13, '2014-02-04 14:32:29'),
-(76, 0, 'free', 0, 258, 14, '2014-02-05 21:00:09'),
-(77, 0, 'free', 0, 307, 14, '2014-02-05 21:11:47'),
-(78, 0, 'free', 0, 308, 13, '2014-02-07 09:50:01'),
-(80, 1500, '', 0, 248, 22, '2014-06-05 08:53:39'),
-(81, 0, 'free', 0, 248, 8, '2014-06-05 10:30:12');
+(1, 500, NULL, '8', 248, 12, '2014-01-09 00:00:00'),
+(4, 0, 'free', '0', 253, 7, '2014-01-09 11:42:02'),
+(5, 0, 'free', '0', 254, 7, '2014-01-09 13:03:25'),
+(6, 0, 'free', '0', 255, 7, '2014-01-09 13:30:48'),
+(7, 0, 'free', '0', 256, 7, '2014-01-09 14:10:34'),
+(8, 0, NULL, '0', 251, 7, '2014-01-09 00:00:00'),
+(14, 0, 'free', '0', 259, 8, '2014-01-13 12:00:16'),
+(19, 0, 'free', '0', 261, 8, '2014-01-13 13:25:14'),
+(21, 0, 'free', '0', 270, 8, '2014-01-13 13:25:32'),
+(22, 0, 'free', '0', 265, 8, '2014-01-13 13:25:50'),
+(25, 0, 'free', '0', 263, 8, '2014-01-13 13:27:20'),
+(26, 0, 'free', '0', 274, 8, '2014-01-13 13:29:28'),
+(28, 0, 'free', '0', 278, 8, '2014-01-13 13:32:41'),
+(29, 0, 'free', '0', 269, 8, '2014-01-13 13:33:33'),
+(31, 0, 'free', '0', 281, 8, '2014-01-13 13:36:22'),
+(32, 0, 'free', '0', 279, 8, '2014-01-13 13:36:27'),
+(33, 0, 'free', '0', 275, 8, '2014-01-13 13:38:41'),
+(34, 0, 'free', '0', 276, 8, '2014-01-13 13:42:02'),
+(35, 0, 'free', '0', 271, 8, '2014-01-13 13:43:29'),
+(36, 0, 'free', '0', 283, 8, '2014-01-13 13:51:04'),
+(38, 0, 'free', '0', 282, 8, '2014-01-13 14:00:20'),
+(39, 0, 'free', '0', 284, 8, '2014-01-13 14:09:06'),
+(40, 0, 'free', '0', 267, 8, '2014-01-13 15:41:54'),
+(45, 0, 'free', '0', 266, 8, '2014-01-13 15:46:48'),
+(46, 0, 'free', '0', 287, 8, '2014-01-13 15:52:48'),
+(47, 0, 'free', '0', 288, 8, '2014-01-13 22:28:13'),
+(48, 0, 'free', '0', 289, 8, '2014-01-14 06:51:23'),
+(49, 0, 'free', '0', 273, 8, '2014-01-14 08:31:12'),
+(50, 0, 'free', '0', 262, 8, '2014-01-14 09:04:40'),
+(51, 0, 'free', '0', 260, 8, '2014-01-14 09:16:24'),
+(54, 0, 'free', '0', 290, 8, '2014-01-15 09:13:17'),
+(58, 0, 'free', '0', 291, 8, '2014-01-16 10:33:38'),
+(59, 0, 'free', '0', 249, 14, '2014-02-03 11:41:17'),
+(60, 0, 'free', '0', 293, 14, '2014-02-03 11:45:50'),
+(61, 0, 'free', '0', 294, 14, '2014-02-03 11:58:46'),
+(62, 0, 'free', '0', 251, 14, '2014-02-03 13:03:58'),
+(63, 0, 'free', '0', 296, 14, '2014-02-03 13:04:17'),
+(64, 0, 'free', '0', 254, 14, '2014-02-03 13:05:04'),
+(65, 0, 'free', '0', 255, 14, '2014-02-03 13:05:48'),
+(66, 0, 'free', '0', 295, 14, '2014-02-03 15:58:58'),
+(67, 0, 'free', '0', 297, 13, '2014-02-03 16:09:52'),
+(68, 0, 'free', '0', 255, 13, '2014-02-03 16:28:24'),
+(69, 0, 'free', '0', 298, 13, '2014-02-03 16:31:59'),
+(70, 0, 'free', '0', 300, 13, '2014-02-03 21:01:01'),
+(71, 0, 'free', '0', 301, 13, '2014-02-03 22:45:05'),
+(72, 0, 'free', '0', 302, 14, '2014-02-03 23:40:14'),
+(73, 0, 'free', '0', 303, 14, '2014-02-04 09:22:42'),
+(74, 0, 'free', '0', 305, 14, '2014-02-04 13:43:29'),
+(75, 0, 'free', '0', 306, 13, '2014-02-04 14:32:29'),
+(76, 0, 'free', '0', 258, 14, '2014-02-05 21:00:09'),
+(77, 0, 'free', '0', 307, 14, '2014-02-05 21:11:47'),
+(78, 0, 'free', '0', 308, 13, '2014-02-07 09:50:01'),
+(81, 0, 'free', '0', 248, 8, '2014-06-05 10:30:12');
 
 -- --------------------------------------------------------
 
@@ -746,7 +761,7 @@ CREATE TABLE IF NOT EXISTS `pending` (
   `course_id` int(50) DEFAULT NULL,
   `form` int(11) DEFAULT '0',
   KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -801,7 +816,7 @@ CREATE TABLE IF NOT EXISTS `recentactivities` (
   `date` datetime NOT NULL,
   `status` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `recentactivities`
@@ -820,7 +835,12 @@ INSERT INTO `recentactivities` (`id`, `desc`, `course`, `date`, `status`) VALUES
 (10, 'ADD', '15', '2014-05-14 14:11:17', 2),
 (11, 'ADD', '16', '2014-05-27 15:55:54', 2),
 (12, 'DELETE', '18', '2014-05-28 16:50:47', 2),
-(13, 'DELETE', '18', '2014-06-05 08:54:03', 2);
+(13, 'DELETE', '18', '2014-06-05 08:54:03', 2),
+(14, 'DELETE', '23', '2014-06-10 22:02:33', 2),
+(15, 'DELETE', '24', '2014-06-10 22:17:55', 2),
+(16, 'DELETE', '25', '2014-06-10 22:31:41', 2),
+(17, 'DELETE', '22', '2014-06-10 23:29:05', 2),
+(18, 'DELETE', '22', '2014-06-10 23:48:30', 2);
 
 -- --------------------------------------------------------
 
@@ -836,7 +856,7 @@ CREATE TABLE IF NOT EXISTS `reserved` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `course_id` (`course_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -872,10 +892,10 @@ CREATE TABLE IF NOT EXISTS `sessions_ios` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `shortForm_all`
+-- Table structure for table `shortform_all`
 --
 
-CREATE TABLE IF NOT EXISTS `shortForm_all` (
+CREATE TABLE IF NOT EXISTS `shortform_all` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `c_unit` varchar(50) NOT NULL,
@@ -986,7 +1006,7 @@ CREATE TABLE IF NOT EXISTS `temp_courses` (
   `email` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `temp_courses_ibfk_1` (`sender`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `temp_courses`
@@ -1211,9 +1231,9 @@ ALTER TABLE `sessions`
   ADD CONSTRAINT `sessions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `shortForm_all`
+-- Constraints for table `shortform_all`
 --
-ALTER TABLE `shortForm_all`
+ALTER TABLE `shortform_all`
   ADD CONSTRAINT `shortForm_all_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --

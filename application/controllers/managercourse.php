@@ -168,11 +168,26 @@ class managercourse extends CI_Controller {
 				if( $row['airfare'] !== $airfare ) $message['airfare'] = $airfare;
 				if( $row['airfareRemarks'] !== $airfareRemarks ) $message['airfareRemarks'] = $airfareRemarks;
 				if( $row['totalexp'] !== $totalexp ) $message['totalexp'] = $totalexp;
+				$tempId = $row['tempId'];
 				break;
 			}
 		}
 		$continue = $this->sendvalid($message);
 		if( empty($continue) ){
+			if($tempId){
+				$data = array(
+					'name' => $_POST['name'],
+					'start' => $start,
+					'end' => $end,
+					'cost' => $_POST['cost'],
+					'venue' => $_POST['venue'],
+					'startTime' => date('H:i', strtotime($_POST['startTime'])),
+					'endTime' => date('H:i', strtotime($_POST['endTime'])),
+					'description' => $_POST['description']
+				);
+				$this->db->where('id', $tempId);
+				$this->db->update('temp_courses', $data);
+			}
 			$this->course_model->change($message);
 			$this->index( 1, 'Edited course has been updated' );
 			return;

@@ -275,12 +275,28 @@ class validation extends CI_Controller {
 	public function removeStudent(){
 		$title['title'] = 'MeTEOR | Validation';
 		$user_id = $_POST['temp'];
+		$stat = $_POST['stat'];
 		$course_id = $_POST['course_id'];
 		$temporary = $_POST['tempId'];
 		$tag = $_POST['tag'];
 		$man = $_POST['manager'];
-		var_dump( $tag );
 
+		if($stat){
+			$data = array(
+				'user_id' => $user_id,
+				'course_id' => $course_id,
+				'refunded' => 1,
+				'date' => date('Y-m-d G:i:s'),
+				'untag' => 1,
+			);
+
+			$query = $this->participantuser_model->getDB('cancelled', 'user_id', $user_id, 'course_id', $course_id, 1);
+			$query = $query->result_array();
+
+			if(!count($query)){
+				$this->db->insert('cancelled', $data);
+			}
+		}
 		$this->vm->removeStudent($course_id, $user_id, $temporary);
 		if( isset($_POST['tag']) ) redirect("http://localhost/meteor/index.php/course/seeRequest/".$temporary."/".$man."/".$tag);
 		else redirect("http://localhost/meteor/index.php/course/process/".$course_id);

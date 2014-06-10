@@ -86,7 +86,7 @@
 		<div class="form-group">
 		   <label class="col-sm-5 control-label" for="CourseName">Attendees</label>
 		  <div class="controls">
-		    <textarea style="white-space:pre-wrap; height: auto! important;" required placeholder="Required" type="textarea" id="attendess" name="attendess" value="" ></textarea>
+		    <textarea style="white-space:pre-wrap; height: auto! important;" required placeholder="Required" type="textarea" id="attendees" name="attendees" value="" ></textarea>
 		  </div>
 		</div>
 		<div class="form-group">
@@ -119,7 +119,7 @@
 		   <label class="col-sm-5 control-label" for="CourseName">Accomodation</label>
 		  <div class="controls">
 		  	<input type="number" min="0" id="accoms" name="accoms" required placeholder="Required" value="" />
-		    <textarea style="white-space:pre-wrap; height: auto! important; margin-left: 41.51%; margin-top:5px; " required placeholder="Required" ows="5" type="textarea" id="accomRemarks" name="accomRemarks" value="" ></textarea>
+		    <textarea style="white-space:pre-wrap; height: auto! important; margin-left: 41.51%; margin-top:5px; " required placeholder="Required" rows="5" type="textarea" id="accomRemarks" name="accomRemarks" value="" ></textarea>
 		  </div>
 		</div>
 		<div class="form-group">
@@ -522,7 +522,7 @@
 	    $(".modal-body #startTime").val( stime );
 	    $(".modal-body #endTime").val( etime );
 	    document.getElementById("venue").value = ven;
-	    document.getElementById("attendess").value = atten;
+	    document.getElementById("attendees").value = atten;
 	    $(".modal-body #available").val( avail );
 	    $(".modal-body #cost").val( cost_s );
 	    $(".modal-body #food").val( food_s );
@@ -603,7 +603,7 @@
 		<div class="form-group">
 		   <label class="col-sm-5 control-label" for="CourseName">Attendees</label>
 		  <div class="controls">
-		    <textarea style="white-space:pre-wrap; height: auto! important;" required placeholder="Required" type="textarea" name="attendess" value="" ></textarea>
+		    <textarea style="white-space:pre-wrap; height: auto! important;" required placeholder="Required" type="textarea" name="attendees" value="" ></textarea>
 		  </div>
 		</div>
 		<div class="form-group">

@@ -466,12 +466,29 @@ class course_temp extends CI_Controller {
 				if( $row['airfare'] !== $airfare ) $message['airfare'] = $airfare;
 				if( $row['airfareRemarks'] !== $airfareRemarks ) $message['airfareRemarks'] = $airfareRemarks;
 				if( $row['totalexp'] !== $totalexp ) $message['totalexp'] = $totalexp;
+				$tempId = $row['tempId'];
 				break;
 			}
 		}
+		
 		$continue = $this->sendvalid($message);
+
 		if( empty($continue) ){
 			$this->course_model->change($message);
+			if($tempId){
+				$data = array(
+					'name' => $_POST['name'],
+					'start' => $start,
+					'end' => $end,
+					'cost' => $_POST['cost'],
+					'venue' => $_POST['venue'],
+					'startTime' => date('H:i', strtotime($_POST['startTime'])),
+					'endTime' => date('H:i', strtotime($_POST['endTime'])),
+					'description' => $_POST['description']
+				);
+				$this->db->where('id', $tempId);
+				$this->db->update('temp_courses', $data);
+			}
 			$this->index( 1, 'Edited course has been updated' );
 			return;
 		}
@@ -592,7 +609,10 @@ class course_temp extends CI_Controller {
 		}
 		else
 		{
-			$this->course_model->set_cancelledStatus();
+			$query = $this->participantuser_model->getDB('courses', 'id', $_POST['course_id'],'','',0 );
+			$query = $query->result_array();
+
+			$this->course_model->set_cancelledStatus($query[0]['tempId']);
 			$this->index();
 		}		
 	}
@@ -865,7 +885,7 @@ class course_temp extends CI_Controller {
 			}
 			$a['counter']++;
 		}
-		
+
 		return $a;
 	}
 
@@ -2065,21 +2085,25 @@ class course_temp extends CI_Controller {
 
 		foreach ($arr as $key) {
 			$temp2 = date('y-m-d', strtotime($key['start']));
-			$count = 0;
+			$count = 0; $pendingCount = 0;
+
+			$pending = $this->participantuser_model->getDB( 'pending', 'course_id', $key['id'], '', '', 0);
+			$pending_array = $pending->result_array();
 
 			if( !$key['approved'] && ($temp1 > $temp2) ){
 				$error = $this->course_model->removeRequest( $key['id'], $key['name'] );
-				echo $error;
+				//echo $error;
 				continue;
 			}
 			$a['count']++;
+			$pendingCount += count($pending_array);
 			//echo count($confirmed_array);
 			if( !$key['approved'] ) {
 				$a['notYet'][] = $key['id'];
 				$a['countNotYet']++;
 				$confirmed = $this->participantuser_model->getDB( 'forsending', 'tempId', $key['id'], '', '', 0);
 				$confirmed_array = $confirmed->result_array();
-				$count = $count + count($confirmed_array);
+				$count += count($confirmed_array);
 
 			}else{
 
@@ -2106,6 +2130,7 @@ class course_temp extends CI_Controller {
 			$a['venue'][] = $key['venue'];
 			$a['countS'][] = $key['count'];
 			$a['confirmedCount'][] = $count;
+			$a['pendingCount'][] = $pendingCount;
 		}
 
 		$uid = $this->login_model->getuid($this->session->userdata('username'));
