@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 30, 2014 at 01:08 PM
+-- Generation Time: Jun 10, 2014 at 02:17 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -186,7 +186,14 @@ CREATE TABLE IF NOT EXISTS `cancelled` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `course_id` (`course_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `cancelled`
+--
+
+INSERT INTO `cancelled` (`id`, `user_id`, `course_id`, `refunded`, `date`, `untag`) VALUES
+(1, 248, 18, 1, '2014-06-05 08:54:01', 1);
 
 -- --------------------------------------------------------
 
@@ -269,7 +276,7 @@ CREATE TABLE IF NOT EXISTS `completed` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `course_id` (`course_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `completed`
@@ -278,7 +285,8 @@ CREATE TABLE IF NOT EXISTS `completed` (
 INSERT INTO `completed` (`id`, `user_id`, `course_id`, `date`, `last`, `string`, `first`) VALUES
 (1, 248, 4, '2014-01-08 00:00:00', 'Jan 10 2014', '8th-10th of Jan  2014', 'Jan 8 2014'),
 (2, 248, 12, '2014-05-30 00:00:00', 'May 31 2014', '1st-31st of May  2014', 'May 1 2014'),
-(3, 248, 18, '2014-05-30 00:00:00', 'Jun 30 2014', '1st-30th of Jun  2014', 'Jun 1 2014');
+(3, 248, 18, '2014-05-30 00:00:00', 'Jun 30 2014', '1st-30th of Jun  2014', 'Jun 1 2014'),
+(4, 301, 13, '2014-06-05 00:00:00', 'Jun 7 2014', '1st-7th of Jun  2014', 'Jun 1 2014');
 
 -- --------------------------------------------------------
 
@@ -365,7 +373,7 @@ INSERT INTO `courses` (`id`, `name`, `description`, `cost`, `start`, `end`, `ava
 (16, 'Data Mining', 'Mining many data', 0, '2014-05-25', '2014-05-31', 10, 0, 0, 'AS 101', '09:00:00', 'Students from UP', 5000, 3000, 0, 8000, '05:00:00', 0, 'Jeep -- ikot', 'Naglakad lang kami', 'To excavate data in places.', 'All are cheese.', 'None', 0),
 (18, 'CS 199', 'Thesis', 1500, '2014-05-01', '2014-12-31', 3, 0, 1, 'DCS', '09:00:00', 'Students', 0, 0, 0, 0, '05:00:00', 0, 'KKB', 'Lakad lang.', 'To publish a paper', 'KKB', 'KKB', 0),
 (19, 'Only', 'Test Only', 0, '2014-05-29', '2014-05-30', 2, 0, 0, 'DCS', '04:00:00', '', 0, 0, 0, 0, '05:00:00', 0, 'wala', 'wala', 'Basta', 'wala', 'wala', 0),
-(22, 'CS 195', 'Apprenticeship', 1500, '2014-06-01', '2014-07-31', 3, 1, 0, 'DCS', '09:00:00', 'students', 1000, 2000, 0, 3000, '17:00:00', 0, 'Galing Bulacan', 'Lakad lang kami', 'To gain expereience', 'Eat all you can', 'DCS lang kami', 0);
+(22, 'CS 195', 'Apprenticeship', 1500, '2014-06-01', '2014-07-31', 3, 0, 1, 'DCS', '09:00:00', 'students', 1000, 2000, 0, 3000, '17:00:00', 0, 'Galing Bulacan', 'Lakad lang kami', 'To gain expereience', 'Eat all you can', 'DCS lang kami', 0);
 
 -- --------------------------------------------------------
 
@@ -473,7 +481,14 @@ CREATE TABLE IF NOT EXISTS `forsending` (
   PRIMARY KEY (`id`),
   KEY `forSending_ibfk_1` (`user_id`),
   KEY `forSending_ibfk_2` (`tempId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `forsending`
+--
+
+INSERT INTO `forsending` (`id`, `user_id`, `dateToday`, `tempId`) VALUES
+(1, 248, '2014-06-05 10:30:12', 3);
 
 -- --------------------------------------------------------
 
@@ -518,7 +533,7 @@ CREATE TABLE IF NOT EXISTS `managers` (
   `status` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `managers`
@@ -657,7 +672,7 @@ CREATE TABLE IF NOT EXISTS `payment` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `course_id` (`course_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=80 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=82 ;
 
 --
 -- Dumping data for table `payment`
@@ -716,7 +731,8 @@ INSERT INTO `payment` (`id`, `amount`, `remarks`, `ornumber`, `user_id`, `course
 (76, 0, 'free', 0, 258, 14, '2014-02-05 21:00:09'),
 (77, 0, 'free', 0, 307, 14, '2014-02-05 21:11:47'),
 (78, 0, 'free', 0, 308, 13, '2014-02-07 09:50:01'),
-(79, 1500, '', 13123, 248, 18, '2014-05-28 18:09:41');
+(80, 1500, '', 0, 248, 22, '2014-06-05 08:53:39'),
+(81, 0, 'free', 0, 248, 8, '2014-06-05 10:30:12');
 
 -- --------------------------------------------------------
 
@@ -728,6 +744,7 @@ CREATE TABLE IF NOT EXISTS `pending` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
   `course_id` int(50) DEFAULT NULL,
+  `form` int(11) DEFAULT '0',
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -742,7 +759,7 @@ CREATE TABLE IF NOT EXISTS `picture` (
   `name` varchar(255) DEFAULT NULL,
   `count` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `picture`
@@ -750,7 +767,7 @@ CREATE TABLE IF NOT EXISTS `picture` (
 
 INSERT INTO `picture` (`id`, `name`, `count`) VALUES
 (8, '2014-02-07empty.png', 1),
-(11, '2014-05-172014-01-092013-07-10coa_signature.png', 1);
+(15, '2014-06-102013-07-22coa_signature.png', 1);
 
 -- --------------------------------------------------------
 
@@ -784,7 +801,7 @@ CREATE TABLE IF NOT EXISTS `recentactivities` (
   `date` datetime NOT NULL,
   `status` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `recentactivities`
@@ -802,7 +819,8 @@ INSERT INTO `recentactivities` (`id`, `desc`, `course`, `date`, `status`) VALUES
 (9, 'ADD', '12', '2014-01-10 16:44:22', 2),
 (10, 'ADD', '15', '2014-05-14 14:11:17', 2),
 (11, 'ADD', '16', '2014-05-27 15:55:54', 2),
-(12, 'DELETE', '18', '2014-05-28 16:50:47', 2);
+(12, 'DELETE', '18', '2014-05-28 16:50:47', 2),
+(13, 'DELETE', '18', '2014-06-05 08:54:03', 2);
 
 -- --------------------------------------------------------
 
@@ -818,14 +836,7 @@ CREATE TABLE IF NOT EXISTS `reserved` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `course_id` (`course_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
-
---
--- Dumping data for table `reserved`
---
-
-INSERT INTO `reserved` (`id`, `user_id`, `course_id`, `date`) VALUES
-(6, 248, 22, '2014-05-30 15:36:58');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -861,6 +872,22 @@ CREATE TABLE IF NOT EXISTS `sessions_ios` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `shortForm_all`
+--
+
+CREATE TABLE IF NOT EXISTS `shortForm_all` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `c_unit` varchar(50) NOT NULL,
+  `office` varchar(50) NOT NULL,
+  `position` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `signature`
 --
 
@@ -879,7 +906,7 @@ CREATE TABLE IF NOT EXISTS `signature` (
   PRIMARY KEY (`id`),
   KEY `course_id` (`course_id`),
   KEY `photo_id` (`photo_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `signature`
@@ -887,7 +914,7 @@ CREATE TABLE IF NOT EXISTS `signature` (
 
 INSERT INTO `signature` (`id`, `course_id`, `photo_id`, `enddate`, `startdate`, `photo_id2`, `type`, `name1`, `position1`, `name2`, `position2`) VALUES
 (8, 13, 8, '2014-02-07', '2014-02-07', 0, 'Attendance', 'Dr. Jaime D.L. Caro', 'Asst. Vice President for Development, UP System and eUP Project Director', '', ''),
-(11, 12, 11, '2014-05-17', '2014-05-12', 0, 'Attendance', 'Sia, Efrelyn Monesit', 'CEO', '', '');
+(15, 12, 15, '2014-06-10', '2014-06-09', 0, 'Attendance', 'Efren Ver Monesit Sia', 'CEO', '', '');
 
 -- --------------------------------------------------------
 
@@ -959,7 +986,7 @@ CREATE TABLE IF NOT EXISTS `temp_courses` (
   `email` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `temp_courses_ibfk_1` (`sender`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `temp_courses`
@@ -988,81 +1015,82 @@ CREATE TABLE IF NOT EXISTS `users` (
   `verified` int(11) NOT NULL DEFAULT '0',
   `slug` varchar(128) NOT NULL,
   `middlename` varchar(50) DEFAULT NULL,
+  `form` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=316 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=315 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `lastname`, `role`, `salt`, `verified`, `slug`, `middlename`) VALUES
-(1, 'meteor.upitdc@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'UpItdc', 'Admin', 0, '', 1, 'GQ3U4JT8Tl5jMofHMTz9GzEu7', 'EUP'),
-(98, 'managerone@mail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Master', 'Manager', 1, '', 1, '121654hfg1h2g1h', NULL),
-(248, 'esia.rizal@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Efren Ver', 'Sia', 2, '', 1, 'jbvWLIuELVjeMpJnzjgvtJseh', 'Monesit'),
-(249, 'kscruz@ittc.up.edu.ph', '6b18bc13b3936a27eb26a414870eca6e412115eb', 'Kenneth Isaac', 'Dela Cruz', 1, '', 1, 'HtyKZ8Pawm4SZoEt1BzvK2ie7', NULL),
-(250, 'lbcatalogo@ittc.up.edu.ph', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Lemuel', 'Catalogo', 1, '', 1, 'sefwer87465fdas', NULL),
-(251, 'cnforteza@ittc.up.edu.ph', 'c4cdaf9bafa9b0b4dc4087ff7189fdb0dbafc6a6', 'Carlos', 'Forteza', 0, '', 1, '56sdf465sd4fdsferw687', NULL),
-(252, 'efren.aldave@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Efren', 'Sia', 1, '', 1, 'fdfw987r56wefSDad', 'Aldave'),
-(253, 'rmpancho@ittc.up.edu.ph', '6ca933944c990f70b33e7432077fc34f1e24b9ea', 'Richmon', 'Pancho', 2, '', 1, 'NLBIwLwEjMpIH9RzC5EVij5NI', NULL),
-(254, 'hssalapare@ittc.up.edu.ph', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Hernando', 'Salapare', 2, '', 1, 'vrcDLmcbZTdpRYLqgggO1LIA2', 'Ewan'),
-(255, 'crpasco@ittc.up.edu.ph', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Cherie Anne', 'Pasco', 2, '', 1, 'v6M87Y30o6PFpvCMBRn3hUc2y', 'Ewan'),
-(256, 'jcamua@ittc.up.edu.ph', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'JUVY', 'CAMUA', 2, '', 1, '6MP9zscXDRvANfJE5uCPTjdOK', 'Ewan'),
-(257, 'vpteodosio@up.edu.ph', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Vincent', 'Teodosio', 2, '', 1, '4x4iUANomAULmpp7MBBLfLZLg', 'Ewan'),
-(258, 'rcsolamo@up.edu.ph', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Ma. Rowena', 'Solamo', 2, '', 1, 'Fg1LbFsjlit5udL19DHDiAr2p', 'Ewan'),
-(259, 'Gengrmerc@yahoo.com', '87053ce147649d913e40cb9cd049b562bced4a27', 'Genoveva', 'Mercado', 2, '', 1, 'YTk4NNsbEJVvbfINdq0gA2LGx', NULL),
-(260, 'rtsuyat@gmail.com', 'fbdb2f50fe1c44bf04f34db68e5b2091e348c43a', 'Rodolfo', 'Suyat', 2, '', 1, 'uqoWLSVnzjbeAfJlkQfGwpmLU', NULL),
-(261, 'jbagsic@gmail.com', 'cf8c972ceaf4c0b9f185f1880be5030215bc5571', 'James Benedict', 'Bagsic', 2, '', 1, 'iQ6GllH3jL6SkJOCWBxTVL7WE', NULL),
-(262, 'sammyniev@yahoo.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Samuel', 'Nievales', 2, '', 1, 'R9337dSr41kshDq7iFZVF6ZKX', 'Aldave'),
-(263, 'amalia.perez@upou.edu.ph', '9fe9b90d693506d87e660ffa9aac0ee6c5118ab6', 'Perez', 'Amalia', 2, '', 1, 'Aln7JOnsaw4kQvA2pcJD9Nmg4', NULL),
-(264, 'agperez_upou@yahoo.com', 'd053051f9fa00a4df16d55e3a356829790c64e27', 'Amalia', 'Perez', 2, '', 0, 'WVWZSsRi6RlZ7p0n3MbTUrICk', NULL),
-(265, 'ruby_allado@yahoo.com', '3ce69380e8f936c32f0549b1198eb21cca3754f5', 'Ruby', 'Allado', 2, '', 1, 'HA72r1J93QgISg5XrnxCvZLS4', NULL),
-(266, 'reynaldolaysico@yahoo.com', '17074388a8496716b262cc5598d7a3b00b94ae9f', 'reynaldo', 'laysico', 2, '', 1, 'BaXUvqxk3qcnsx4o5EVmfDfxg', NULL),
-(267, 'minacreyes@yahoo.com', '696b18afe8865081603d372e643c9b1f849754da', 'Romina', 'Reyes', 2, '', 1, '0lEbv1B7q8qiSTqjYsqzTGNQ5', NULL),
-(268, 'pura.amoloza@upou.edu.ph', '9ceab1febd414b7fc5d4ca07f487f33d07b23dba', 'Pura', 'Amoloza', 2, '', 0, '88N0J4MgRA38SqU5OepzuYXUo', NULL),
-(269, 'uplb.bacsecretariat@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Gercy Love', 'Juanillas', 2, '', 1, '9akAe9nimeCzBxWmgfRe7BA5o', 'Ewan'),
-(270, 'supply_property@yahoo.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Gorgonio', 'Nunal III', 2, '', 1, 'GzNgRqXYhGvaEVMShqUYP8eTM', NULL),
-(271, 'rodel_monta@yahoo.com', '0c60c97a22f055e8c4799381303010df3891148e', 'rodel', 'montanano', 2, '', 1, 'nlURaiWhBMFDS0iHlTehil5ee', NULL),
-(272, 'rossalbertgonzales@ymail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Albert', 'Gonzales', 2, '', 1, 'aEpA8iUNJIXbuQG1qgnFXeaFZ', 'Martinez'),
-(273, 'jkeangrif@yahoo.com', '183d688aeacf1e4de331e9155ba53f3f9718089d', 'Venus', 'Claveria', 2, '', 1, 'CjQBxP2z8mcYQZ7FAp3Ik5YhF', NULL),
-(274, 'jb.punzalan@yahoo.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'jaybee', 'punzalan', 2, '', 1, 'D2eBQfnXWO6Xcqwka0RJTPhdb', NULL),
-(275, 'janet_galamgam@yahoo.com', '43a5a5767a683e2e46435811c6601da8fccdc377', 'Janet', 'Catangcatang', 2, '', 1, 'BTVWbcDhcMzUXpBDN5dG9czx3', NULL),
-(276, 'remumay@yahoo.com', '8d513a3bcd59a153cbec3c799a1636386cbc15b3', 'rommel', 'medina', 2, '', 1, '71O82478OmyUswu3D6qcV116p', NULL),
-(277, 'lea_spmo@yahoo.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'lea', 'gonzales', 2, '', 1, '00yPPSy8nN0hVWBwXudLKRRgy', NULL),
-(278, 'bcmevangelista@yahoo.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'bennie', 'evangelista', 2, '', 1, 'MCLbxHWuVlnAJZTUgJwdeE7YR', NULL),
-(279, 'jaycees2@yahoo.com', '9901b288a9f659e2ec344c1d549d24503c8c5607', 'juliet', 'gayas', 2, '', 1, 'Nw1K2KQZn6pXoGzjYbNFjiM3v', NULL),
-(280, 'cluesebio@yahoo.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Cristina', 'Eusebio', 2, '', 0, 'TKmpwlzeKoaXmuMqY7kCBzKMt', NULL),
-(281, 'stineli_m@yahoo.com.sg', '2c4c3f003c5394f2ba6041c491a3ff2a22e173d5', 'MA. STINELI', 'MAGDADARO', 2, '', 1, 'tRPyWwBjU3tIFEXgHovzeZFvL', NULL),
-(282, 'pgh_purchasing@yahoo.com', 'c95bd005a1261b6643bf60c3e3f3ffaac5217020', 'Fenie', 'Sinarao', 2, '', 1, 'eiQGQW5QnoFsa3ZrHyBTidlJ8', NULL),
-(283, 'clueusebio@yahoo.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Cristina', 'Eusebio', 2, '', 1, 'fgMLA9fEOmHafggwKQKoDenck', NULL),
-(284, 'Antonio_beconado@yahoo.com', '424894614e3f74a53d92d33db149320b5e858ab0', 'Antonio Jr.', 'Beconado M', 2, '', 1, 'IHgOUyUwtShM5Ehtr65XdwPwQ', NULL),
-(285, 'mariel_dimaano@yahoo.com', 'c9904d5ab9931e0f29f721aa0754effc77b66196', 'Mariella', 'Dizon', 2, '', 1, 'xafZrjpJSdvXoEuNOxSrx7yHA', NULL),
-(286, 'aurora_verdejo@yahoo.com', 'be6cee3dcc12c59e3dc34001e7232b51e7330de0', 'Nancy', 'Lugtu', 2, '', 0, 'zJCY2xA9yqHsxMAcRZNXlHauK', NULL),
-(287, 'erz_117027@yahoo.com', '12b1dbb3fcd8929e2a8344eeea10f0baca1213e0', 'Erwin', 'Dando', 2, '', 1, 'XgbcepmSqrDwqbaGfkJPtif5P', NULL),
-(288, 'isagani_bagus@yahoo.com', 'bd7832b1bce2a9aecf05718b4fab87d384df5fb4', 'Isagani', 'Bagus', 2, '', 1, 'TkviYOQyTo4ACoogMgV1PALem', NULL),
-(289, 'sasantos@post.upm.edu.ph', '81cd1035e9610df04ce0b9a47f2054f67c279f5f', 'solita ', 'santos', 2, '', 1, 'R4HIgfVIE6T5UDekczLYLUiOR', NULL),
-(290, 'taarroco@up.edu.ph', 'b6c3dfac31ee5534ee0d0e8344f0af5ff0bae4d5', 'teresa', 'arroco', 2, '', 1, 'FNAm8MRty6BXQ8WiRioaxKemw', NULL),
-(291, 'joelllobit@yahoo.com', '9cbcd952e4af66c8d062c72fca57a9a24f0bf83d', 'joel', 'llobit', 2, '', 1, '8wnqn96wmjjdCEx4tPGdjsqPX', NULL),
-(292, 'tonyblackrocks@gmail.com', '305cfe6e6277aa7020978ac06a2d304a7332011d', 'Test', 'Test', 2, '', 0, 'f718b4549d7ec6bace67f1e542e313f6effd2db5', NULL),
-(293, 'szcortejos@ittc.up.edu.ph', '5c342f23b1efbb60ba244a5b605a5393b7899c56', 'Sarah Grace', 'Cortejos', 2, '', 1, '2p2SOL6HEy4PkMDnwjLmhspT5', NULL),
-(294, 'registrar_uplb@yahoo.com', '5339f63741f76b57dd192f00649b44cf7aede0df', 'Ma. Arabella Caridad', 'Ricarte', 2, '', 1, 'l6bOFXZnznAxPilFID4jZfvB6', NULL),
-(295, 'jrrafanan@upb.edu.ph', '0313a9f806f0a1703c72b20e714100038c4336e3', 'JOCELYN', 'RAFANAN', 2, '', 1, 'puI03SVWRPcsOQ8ZVaIuOSlnR', NULL),
-(296, 'jacob.obinguar@up.edu.ph', 'af900abb8fb144c7aca421cd786b11810c2127f1', 'JACOB', 'OBINGUAR', 2, '', 1, 'EQnkWpAKCOU3PB5zufTWC52a5', NULL),
-(297, 'jennylyn.llamas@gmail.com', '1719a6d595827a04ca11ec9d89ec1e460280021f', 'Jennylyn Teodora', 'Baluyot', 2, '', 1, 'jZy8RzvYBpAFNV8oeKCHsVdv2', NULL),
-(298, 'anamaria.alarilla@gmail.com', '9215ba191a6de9ea8979bd47f06700c3a3d0e0fc', 'ana maria', 'alarilla', 2, '', 1, 'FJmun9smFlGGMpuKZQnxh15kc', NULL),
-(299, 'mgc405@yahoo.com', '1d02684da8258eaa2740ad075d8dc3550852a4bb', 'Myrna', 'Carandang', 2, '', 0, '9Rxw4JSBoiaPINNh5uybfZfhY', NULL),
-(300, 'rina@post.upm.edu.ph', '3a5c0806ce29c2464801167542ca82924a4f5e87', 'Lorina', 'Tolentino Alcid', 2, '', 1, '7OOUdXRrS75RGkawsIQtsQt3w', NULL),
-(301, 'wvalangui@gmail.com', 'eb02b0c3729282d99ee3b4decb96aa0070580da5', 'Willy V.', 'Alangui', 2, '', 1, '2cfdjTYXgnIkfpYxwvioOMLqc', NULL),
-(302, 'btrmortel@upm.edu.ph', 'd3b6e75e2f7ca29c6b7851ed44a18ddf8e479deb', 'Buenalyn Teresita', 'Ramos-Mortel', 2, '', 1, 'KmhhbInCLLmEcJQyI4So4FHMP', NULL),
-(303, 'jmmapalo@upb.edu.ph', '0aa69e071dac12e02864f58a2e10678aee2fee54', 'jay', 'mapalo', 2, '', 1, 'blRhdOnRVQTrlSZaw7Dobkof9', NULL),
-(304, 'our@upmin.edu.ph', 'a6c61b35094e635a3ce10375744211c20c0bb4ad', 'UP Mindanao', 'Office of the University Registrar', 2, '', 0, 'PVzBmRRrPPY5m4f1lBiBYNyiC', NULL),
-(305, 'josego75115@gmail.com', '8dd68b7f42086716a98985473f9e09794e01c906', 'Jose', 'Go', 2, '', 1, 'FiuuAbX1Kjmih2E9hkkzoF1BL', NULL),
-(306, 'mjdeluna@post.upm.edu.ph', '0510d07adb61c9361f3cad5ba657304b77fba90c', 'Marie Josephine', 'De Luna', 2, '', 1, '6SptFPBYtFUCgKN931L6sHMDS', NULL),
-(307, 'records@upou.edu.ph', '11184cc70c51e2d8b4177ecdd2f81494c0730a30', 'Rhodora', 'Pamulaklakin', 2, '', 1, 'R2N13n5jclVYz9mxyrfHClo4O', NULL),
-(308, 'jessicakcarino@gmail.com', '54ac27b445b73c5a5c44cfdb097305c2b16855ad', 'Jessica', 'Carino', 2, '', 1, 'oWqDSPDKgr1d9Cbk9oQ3yF0Y7', NULL),
-(309, 'clramos@upsitf.org', 'f26b85802a61c49cde714733944a206422d298e0', 'Cha', 'Ramos', 2, '', 1, '1DCT4fcEqU4qtrj7J1buCaglG', NULL),
-(310, 'paulopaje@gmail.com', 'a66c3c33580b15c33315abe1bb9a2aa39171948b', 'Paulo Noel G', 'Paje', 2, '', 1, 'oXp4Fb72z6MJNSNBClU4BRVUj', NULL),
-(314, 'evsia@ittc.up.edu.ph', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Efrelyn', 'Sia', 1, '', 1, 'Zx6cVRf7eX8xVkprFuGuyCbfY', NULL);
+INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `lastname`, `role`, `salt`, `verified`, `slug`, `middlename`, `form`) VALUES
+(1, 'meteor.upitdc@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'UpItdc', 'Admin', 0, '', 1, 'GQ3U4JT8Tl5jMofHMTz9GzEu7', 'EUP', 0),
+(98, 'managerone@mail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Master', 'Manager', 1, '', 1, '121654hfg1h2g1h', NULL, 0),
+(248, 'esia.rizal@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Efren Ver', 'Sia', 2, '', 1, 'jbvWLIuELVjeMpJnzjgvtJseh', 'Monesit', 1),
+(249, 'kscruz@ittc.up.edu.ph', '6b18bc13b3936a27eb26a414870eca6e412115eb', 'Kenneth Isaac', 'Dela Cruz', 1, '', 1, 'HtyKZ8Pawm4SZoEt1BzvK2ie7', NULL, 0),
+(250, 'lbcatalogo@ittc.up.edu.ph', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Lemuel', 'Catalogo', 1, '', 1, 'sefwer87465fdas', NULL, 0),
+(251, 'cnforteza@ittc.up.edu.ph', 'c4cdaf9bafa9b0b4dc4087ff7189fdb0dbafc6a6', 'Carlos', 'Forteza', 0, '', 1, '56sdf465sd4fdsferw687', NULL, 0),
+(252, 'efren.aldave@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Efren', 'Sia', 1, '', 1, 'fdfw987r56wefSDad', 'Aldave', 0),
+(253, 'rmpancho@ittc.up.edu.ph', '6ca933944c990f70b33e7432077fc34f1e24b9ea', 'Richmon', 'Pancho', 2, '', 1, 'NLBIwLwEjMpIH9RzC5EVij5NI', NULL, 0),
+(254, 'hssalapare@ittc.up.edu.ph', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Hernando', 'Salapare', 2, '', 1, 'vrcDLmcbZTdpRYLqgggO1LIA2', 'Ewan', 0),
+(255, 'crpasco@ittc.up.edu.ph', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Cherie Anne', 'Pasco', 2, '', 1, 'v6M87Y30o6PFpvCMBRn3hUc2y', 'Ewan', 0),
+(256, 'jcamua@ittc.up.edu.ph', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'JUVY', 'CAMUA', 2, '', 1, '6MP9zscXDRvANfJE5uCPTjdOK', 'Ewan', 0),
+(257, 'vpteodosio@up.edu.ph', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Vincent', 'Teodosio', 2, '', 1, '4x4iUANomAULmpp7MBBLfLZLg', 'Ewan', 0),
+(258, 'rcsolamo@up.edu.ph', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Ma. Rowena', 'Solamo', 2, '', 1, 'Fg1LbFsjlit5udL19DHDiAr2p', 'Ewan', 0),
+(259, 'Gengrmerc@yahoo.com', '87053ce147649d913e40cb9cd049b562bced4a27', 'Genoveva', 'Mercado', 2, '', 1, 'YTk4NNsbEJVvbfINdq0gA2LGx', NULL, 0),
+(260, 'rtsuyat@gmail.com', 'fbdb2f50fe1c44bf04f34db68e5b2091e348c43a', 'Rodolfo', 'Suyat', 2, '', 1, 'uqoWLSVnzjbeAfJlkQfGwpmLU', NULL, 0),
+(261, 'jbagsic@gmail.com', 'cf8c972ceaf4c0b9f185f1880be5030215bc5571', 'James Benedict', 'Bagsic', 2, '', 1, 'iQ6GllH3jL6SkJOCWBxTVL7WE', NULL, 0),
+(262, 'sammyniev@yahoo.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Samuel', 'Nievales', 2, '', 1, 'R9337dSr41kshDq7iFZVF6ZKX', 'Aldave', 0),
+(263, 'amalia.perez@upou.edu.ph', '9fe9b90d693506d87e660ffa9aac0ee6c5118ab6', 'Perez', 'Amalia', 2, '', 1, 'Aln7JOnsaw4kQvA2pcJD9Nmg4', NULL, 0),
+(264, 'agperez_upou@yahoo.com', 'd053051f9fa00a4df16d55e3a356829790c64e27', 'Amalia', 'Perez', 2, '', 0, 'WVWZSsRi6RlZ7p0n3MbTUrICk', NULL, 0),
+(265, 'ruby_allado@yahoo.com', '3ce69380e8f936c32f0549b1198eb21cca3754f5', 'Ruby', 'Allado', 2, '', 1, 'HA72r1J93QgISg5XrnxCvZLS4', NULL, 0),
+(266, 'reynaldolaysico@yahoo.com', '17074388a8496716b262cc5598d7a3b00b94ae9f', 'reynaldo', 'laysico', 2, '', 1, 'BaXUvqxk3qcnsx4o5EVmfDfxg', NULL, 0),
+(267, 'minacreyes@yahoo.com', '696b18afe8865081603d372e643c9b1f849754da', 'Romina', 'Reyes', 2, '', 1, '0lEbv1B7q8qiSTqjYsqzTGNQ5', NULL, 0),
+(268, 'pura.amoloza@upou.edu.ph', '9ceab1febd414b7fc5d4ca07f487f33d07b23dba', 'Pura', 'Amoloza', 2, '', 0, '88N0J4MgRA38SqU5OepzuYXUo', NULL, 0),
+(269, 'uplb.bacsecretariat@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Gercy Love', 'Juanillas', 2, '', 1, '9akAe9nimeCzBxWmgfRe7BA5o', 'Ewan', 0),
+(270, 'supply_property@yahoo.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Gorgonio', 'Nunal III', 2, '', 1, 'GzNgRqXYhGvaEVMShqUYP8eTM', NULL, 0),
+(271, 'rodel_monta@yahoo.com', '0c60c97a22f055e8c4799381303010df3891148e', 'rodel', 'montanano', 2, '', 1, 'nlURaiWhBMFDS0iHlTehil5ee', NULL, 0),
+(272, 'rossalbertgonzales@ymail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Albert', 'Gonzales', 2, '', 1, 'aEpA8iUNJIXbuQG1qgnFXeaFZ', 'Martinez', 0),
+(273, 'jkeangrif@yahoo.com', '183d688aeacf1e4de331e9155ba53f3f9718089d', 'Venus', 'Claveria', 2, '', 1, 'CjQBxP2z8mcYQZ7FAp3Ik5YhF', NULL, 0),
+(274, 'jb.punzalan@yahoo.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'jaybee', 'punzalan', 2, '', 1, 'D2eBQfnXWO6Xcqwka0RJTPhdb', NULL, 0),
+(275, 'janet_galamgam@yahoo.com', '43a5a5767a683e2e46435811c6601da8fccdc377', 'Janet', 'Catangcatang', 2, '', 1, 'BTVWbcDhcMzUXpBDN5dG9czx3', NULL, 0),
+(276, 'remumay@yahoo.com', '8d513a3bcd59a153cbec3c799a1636386cbc15b3', 'rommel', 'medina', 2, '', 1, '71O82478OmyUswu3D6qcV116p', NULL, 0),
+(277, 'lea_spmo@yahoo.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'lea', 'gonzales', 2, '', 1, '00yPPSy8nN0hVWBwXudLKRRgy', NULL, 0),
+(278, 'bcmevangelista@yahoo.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'bennie', 'evangelista', 2, '', 1, 'MCLbxHWuVlnAJZTUgJwdeE7YR', NULL, 0),
+(279, 'jaycees2@yahoo.com', '9901b288a9f659e2ec344c1d549d24503c8c5607', 'juliet', 'gayas', 2, '', 1, 'Nw1K2KQZn6pXoGzjYbNFjiM3v', NULL, 0),
+(280, 'cluesebio@yahoo.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Cristina', 'Eusebio', 2, '', 0, 'TKmpwlzeKoaXmuMqY7kCBzKMt', NULL, 0),
+(281, 'stineli_m@yahoo.com.sg', '2c4c3f003c5394f2ba6041c491a3ff2a22e173d5', 'MA. STINELI', 'MAGDADARO', 2, '', 1, 'tRPyWwBjU3tIFEXgHovzeZFvL', NULL, 0),
+(282, 'pgh_purchasing@yahoo.com', 'c95bd005a1261b6643bf60c3e3f3ffaac5217020', 'Fenie', 'Sinarao', 2, '', 1, 'eiQGQW5QnoFsa3ZrHyBTidlJ8', NULL, 0),
+(283, 'clueusebio@yahoo.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Cristina', 'Eusebio', 2, '', 1, 'fgMLA9fEOmHafggwKQKoDenck', NULL, 0),
+(284, 'Antonio_beconado@yahoo.com', '424894614e3f74a53d92d33db149320b5e858ab0', 'Antonio Jr.', 'Beconado M', 2, '', 1, 'IHgOUyUwtShM5Ehtr65XdwPwQ', NULL, 0),
+(285, 'mariel_dimaano@yahoo.com', 'c9904d5ab9931e0f29f721aa0754effc77b66196', 'Mariella', 'Dizon', 2, '', 1, 'xafZrjpJSdvXoEuNOxSrx7yHA', NULL, 0),
+(286, 'aurora_verdejo@yahoo.com', 'be6cee3dcc12c59e3dc34001e7232b51e7330de0', 'Nancy', 'Lugtu', 2, '', 0, 'zJCY2xA9yqHsxMAcRZNXlHauK', NULL, 0),
+(287, 'erz_117027@yahoo.com', '12b1dbb3fcd8929e2a8344eeea10f0baca1213e0', 'Erwin', 'Dando', 2, '', 1, 'XgbcepmSqrDwqbaGfkJPtif5P', NULL, 0),
+(288, 'isagani_bagus@yahoo.com', 'bd7832b1bce2a9aecf05718b4fab87d384df5fb4', 'Isagani', 'Bagus', 2, '', 1, 'TkviYOQyTo4ACoogMgV1PALem', NULL, 0),
+(289, 'sasantos@post.upm.edu.ph', '81cd1035e9610df04ce0b9a47f2054f67c279f5f', 'solita ', 'santos', 2, '', 1, 'R4HIgfVIE6T5UDekczLYLUiOR', NULL, 0),
+(290, 'taarroco@up.edu.ph', 'b6c3dfac31ee5534ee0d0e8344f0af5ff0bae4d5', 'teresa', 'arroco', 2, '', 1, 'FNAm8MRty6BXQ8WiRioaxKemw', NULL, 0),
+(291, 'joelllobit@yahoo.com', '9cbcd952e4af66c8d062c72fca57a9a24f0bf83d', 'joel', 'llobit', 2, '', 1, '8wnqn96wmjjdCEx4tPGdjsqPX', NULL, 0),
+(292, 'tonyblackrocks@gmail.com', '305cfe6e6277aa7020978ac06a2d304a7332011d', 'Test', 'Test', 2, '', 0, 'f718b4549d7ec6bace67f1e542e313f6effd2db5', NULL, 0),
+(293, 'szcortejos@ittc.up.edu.ph', '5c342f23b1efbb60ba244a5b605a5393b7899c56', 'Sarah Grace', 'Cortejos', 2, '', 1, '2p2SOL6HEy4PkMDnwjLmhspT5', NULL, 0),
+(294, 'registrar_uplb@yahoo.com', '5339f63741f76b57dd192f00649b44cf7aede0df', 'Ma. Arabella Caridad', 'Ricarte', 2, '', 1, 'l6bOFXZnznAxPilFID4jZfvB6', NULL, 0),
+(295, 'jrrafanan@upb.edu.ph', '0313a9f806f0a1703c72b20e714100038c4336e3', 'JOCELYN', 'RAFANAN', 2, '', 1, 'puI03SVWRPcsOQ8ZVaIuOSlnR', NULL, 0),
+(296, 'jacob.obinguar@up.edu.ph', 'af900abb8fb144c7aca421cd786b11810c2127f1', 'JACOB', 'OBINGUAR', 2, '', 1, 'EQnkWpAKCOU3PB5zufTWC52a5', NULL, 0),
+(297, 'jennylyn.llamas@gmail.com', '1719a6d595827a04ca11ec9d89ec1e460280021f', 'Jennylyn Teodora', 'Baluyot', 2, '', 1, 'jZy8RzvYBpAFNV8oeKCHsVdv2', NULL, 0),
+(298, 'anamaria.alarilla@gmail.com', '9215ba191a6de9ea8979bd47f06700c3a3d0e0fc', 'ana maria', 'alarilla', 2, '', 1, 'FJmun9smFlGGMpuKZQnxh15kc', NULL, 0),
+(299, 'mgc405@yahoo.com', '1d02684da8258eaa2740ad075d8dc3550852a4bb', 'Myrna', 'Carandang', 2, '', 0, '9Rxw4JSBoiaPINNh5uybfZfhY', NULL, 0),
+(300, 'rina@post.upm.edu.ph', '3a5c0806ce29c2464801167542ca82924a4f5e87', 'Lorina', 'Tolentino Alcid', 2, '', 1, '7OOUdXRrS75RGkawsIQtsQt3w', NULL, 0),
+(301, 'wvalangui@gmail.com', 'eb02b0c3729282d99ee3b4decb96aa0070580da5', 'Willy V.', 'Alangui', 2, '', 1, '2cfdjTYXgnIkfpYxwvioOMLqc', NULL, 0),
+(302, 'btrmortel@upm.edu.ph', 'd3b6e75e2f7ca29c6b7851ed44a18ddf8e479deb', 'Buenalyn Teresita', 'Ramos-Mortel', 2, '', 1, 'KmhhbInCLLmEcJQyI4So4FHMP', NULL, 0),
+(303, 'jmmapalo@upb.edu.ph', '0aa69e071dac12e02864f58a2e10678aee2fee54', 'jay', 'mapalo', 2, '', 1, 'blRhdOnRVQTrlSZaw7Dobkof9', NULL, 0),
+(304, 'our@upmin.edu.ph', 'a6c61b35094e635a3ce10375744211c20c0bb4ad', 'UP Mindanao', 'Office of the University Registrar', 2, '', 0, 'PVzBmRRrPPY5m4f1lBiBYNyiC', NULL, 0),
+(305, 'josego75115@gmail.com', '8dd68b7f42086716a98985473f9e09794e01c906', 'Jose', 'Go', 2, '', 1, 'FiuuAbX1Kjmih2E9hkkzoF1BL', NULL, 0),
+(306, 'mjdeluna@post.upm.edu.ph', '0510d07adb61c9361f3cad5ba657304b77fba90c', 'Marie Josephine', 'De Luna', 2, '', 1, '6SptFPBYtFUCgKN931L6sHMDS', NULL, 0),
+(307, 'records@upou.edu.ph', '11184cc70c51e2d8b4177ecdd2f81494c0730a30', 'Rhodora', 'Pamulaklakin', 2, '', 1, 'R2N13n5jclVYz9mxyrfHClo4O', NULL, 0),
+(308, 'jessicakcarino@gmail.com', '54ac27b445b73c5a5c44cfdb097305c2b16855ad', 'Jessica', 'Carino', 2, '', 1, 'oWqDSPDKgr1d9Cbk9oQ3yF0Y7', NULL, 0),
+(309, 'clramos@upsitf.org', 'f26b85802a61c49cde714733944a206422d298e0', 'Cha', 'Ramos', 2, '', 1, '1DCT4fcEqU4qtrj7J1buCaglG', NULL, 0),
+(310, 'paulopaje@gmail.com', 'a66c3c33580b15c33315abe1bb9a2aa39171948b', 'Paulo Noel G', 'Paje', 2, '', 1, 'oXp4Fb72z6MJNSNBClU4BRVUj', NULL, 0),
+(314, 'evsia@ittc.up.edu.ph', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Efrelyn', 'Sia', 1, '', 1, 'Zx6cVRf7eX8xVkprFuGuyCbfY', NULL, 0);
 
 --
 -- Constraints for dumped tables
@@ -1181,6 +1209,12 @@ ALTER TABLE `reserved`
 --
 ALTER TABLE `sessions`
   ADD CONSTRAINT `sessions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `shortForm_all`
+--
+ALTER TABLE `shortForm_all`
+  ADD CONSTRAINT `shortForm_all_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `signature`
