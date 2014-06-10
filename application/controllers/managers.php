@@ -17,7 +17,7 @@ class managers extends CI_Controller {
 		}
 	}
 
-	public function index( $error = '' )
+	public function index( $error=0, $message='' )
 	{	
 		$uid = $this->login_model->getuid($this->session->userdata('username'));
 		/*$query = $this->db->get_where( 'details', array('user_id' => $uid['id']) );
@@ -43,7 +43,8 @@ class managers extends CI_Controller {
 		$a['title'] = 'MeTEOR | Managers';
 		$a = $this->managers($a);
 		$a['error'] = $error;
-		
+		$a['message'] = $message;
+
 		$this->load->helper('url');
 		$a['active_nav'] = 'VIEW';
 
@@ -51,6 +52,18 @@ class managers extends CI_Controller {
 		$this->load->view('templates/sidebar_man', $a);
 		$this->load->view('managers/index', $a);
 		//$this->load->view('templates/footeradmin');
+	}
+
+	public function delete(){
+		$user_id = $_POST['id'];
+		$this->db->where('user_id', $user_id);
+		$this->db->delete('managers');
+
+		$this->db->where('id', $user_id);
+		$this->db->delete('users');
+
+		$this->index(1,'Manager Successfully deleted.');
+		return;
 	}
 
 	public function search_results() 

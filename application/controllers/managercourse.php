@@ -24,7 +24,7 @@ class managercourse extends CI_Controller {
 		$data['userid'] = $uid['id'];
 	}
 
-	public function index()
+	public function index($error=0, $message='')
 	{		
 		$this->load->helper('url');
 		include_once('course_temp.php');
@@ -61,7 +61,9 @@ class managercourse extends CI_Controller {
 		$cancelled = array();
 		$dissolved = array();
 		$a['count'] = 0;
-		
+		$a['error'] = $error;
+		$a['message'] = $message;
+
 		foreach( $data['courses'] as $row ){
 			$cancelled = $this->course_model->fetch_cancelled($row['id']);
 			$arrayCancelled = $cancelled->row_array();
@@ -105,6 +107,149 @@ class managercourse extends CI_Controller {
 		
 	}
 	
+	public function addition(){
+		$this->course_model->set_courses();
+		$this->index(1, 'New Course has been added.');
+	}
+
+	public function save(){
+		$course_id = $this->input->post("course_id");
+		$name = $this->input->post("names");
+		$description = $this->input->post("description");
+		$objectives = $this->input->post("objectives");
+		$startTime = $this->input->post("startTime");
+		$endTime = $this->input->post("endTime");
+		$venue = $this->input->post("venue");
+		$start = $this->input->post("startDate");		
+		$end = $this->input->post("endDate");
+
+
+		$start = date('Y-m-d', strtotime($start));
+		$end = date('Y-m-d', strtotime($end));
+
+		$cost = $this->input->post("cost");
+		$available = $this->input->post("available");
+		$attendees = $this->input->post("attendees");
+		$foodexp = $this->input->post("food");
+		$foodRemarks = $this->input->post("foodRemarks");
+		$transpo = $this->input->post("transport");
+		$landRemarks = $this->input->post("transpoRemarks");
+		$accommodation = $this->input->post("accoms");
+		$accomodationRemarks = $this->input->post("accomRemarks");
+		$airfare = $this->input->post("air");
+		$airfareRemarks = $this->input->post("airRemarks");
+		$totalexp = $foodexp + $accommodation + $transpo + $airfare;
+
+		$message = array();
+		$message['name'] = $name;
+		$message['course_id'] = $course_id;
+
+		$data['courses'] = $this->course_model->get_courses(1);
+		foreach( $data['courses'] as $row ){
+			if( $row['id'] == $course_id ){
+				$message['course_id'] = $row['id'];
+				if( $row['name'] !== $name ) $message['name'] = $name;
+				if( $row['description'] !== $description ) $message['description'] = $description;
+				if( $row['objectives'] !== $objectives ) $message['objectives'] = $objectives;
+				if( $row['start'] !== $start ) $message['start'] = $start;
+				if( $row['end'] !== $end ) $message['end'] = $end;
+				if( $row['startTime'] !== $startTime) $message['startTime'] = $startTime;
+				if( $row['endTime'] !== $endTime) $message['endTime'] = $endTime;
+				if( $row['venue'] !== $venue ) $message['venue'] = $venue;
+				if( $row['cost'] !== $cost ) $message['cost'] = $cost;
+				if( $row['available'] !== $available ) $message['available'] = $available;
+				if( $row['attendees'] !== $attendees ) $message['attendees'] = $attendees;
+				if( $row['food'] !== $foodexp ) $message['food'] = $foodexp;
+				if( $row['foodRemarks'] !== $foodRemarks ) $message['foodRemarks'] = $foodRemarks;
+				if( $row['landTranspo'] !== $transpo ) $message['landTranspo'] = $transpo;
+				if( $row['landRemarks'] !== $landRemarks ) $message['landRemarks'] = $landRemarks;
+				if( $row['accomodation'] !== $accommodation ) $message['accomodation'] = $accommodation;
+				if( $row['accomodationRemarks'] !== $accomodationRemarks ) $message['accomodationRemarks'] = $accomodationRemarks;
+				if( $row['airfare'] !== $airfare ) $message['airfare'] = $airfare;
+				if( $row['airfareRemarks'] !== $airfareRemarks ) $message['airfareRemarks'] = $airfareRemarks;
+				if( $row['totalexp'] !== $totalexp ) $message['totalexp'] = $totalexp;
+				break;
+			}
+		}
+		$continue = $this->sendvalid($message);
+		if( empty($continue) ){
+			$this->course_model->change($message);
+			$this->index( 1, 'Edited course has been updated' );
+			return;
+		}
+		$this->index( 0, $continue );
+	}
+
+	public function sendvalid($message){
+		$b = array();
+		$b = $message;
+
+		$this->load->library('phpmailer');
+		$mailer = new PHPMailer();
+
+		$mailer->IsSMTP(); // enable SMTP
+		$mailer->SMTPDebug = 1;  // debugging: 1 = errors and messages, 2 = messages only
+		$mailer->SMTPAuth = true;  // authentication enabled
+		$mailer->SMTPSecure = 'tls'; // secure transfer enabled REQUIRED for GMail
+		$mailer->Host = 'smtp.gmail.com';
+		$mailer->Port = 587; 
+		$mailer->Username = 'meteor.upitdc@gmail.com';  
+		$mailer->Password = 'meteor123';  
+
+		$mailer->SetFrom('noreply@localhost/meteor', 'MeTEOR Notification');
+		$mailer->Subject = '[MeTEOR] Course Detail Change';
+		/*$config = array(
+			'protocol' => 'smtp',
+			'smtp_host' => 'ssl://smtp.googlemail.com',
+			'smtp_port' => 25,
+			'smtp_user' => 'meteor.upitdc@gmail.com',
+			'smtp_pass' => 'meteor123',
+			'mailtype'  => 'html',
+			'wordwrap' => TRUE,
+			'charset'   => 'iso-8859-1'
+		);
+		$this->load->library('email',$config);
+		$this->email->set_newline("\r\n");
+		$this->email->set_priority(1);*/
+		
+		if( !empty($message['description']) || !empty($message['venue']) || !empty($message['start']) || !empty($message['end'])){
+			//$msg = "The course ".$message['name']." you've enrolled, received changes as follows:\n\n";
+			
+			//$msg .="============================================================\n";
+			/*if(!empty($message['description']) ) $msg .= "\nDescription is now ".$message['description'];
+			if(!empty($message['venue']) ) $msg .= "\nThe Venue is now on ".$message['venue'];
+			if(!empty($message['start']) ) $msg .= "\nThe starting date is now on ".date( 'F j\, Y', strtotime($message['start']))." ";
+			if(!empty($message['end']) ) $msg .= "and the ending date is now on ".date( 'F j\, Y', strtotime($message['end'])).".";
+			$msg .="\n\n============================================================\n\n";
+			
+			$msg .= "If You have any comments, suggestions, and reactions, feel free to contact us at localhost/meteor. Thank you for registering.\n\n";
+			*/
+
+			$mailer->Body = $this->load->view('course/sendChange', $b, TRUE);
+			$forSending = 0;
+			
+			$query = $this->course_model->fetch_All($message['course_id']);
+			foreach( $query->result_array() as $row ){
+				$mailList = $this->course_model->getListParticipants($row['user_id']);
+				$arrayList = $mailList->row_array();
+				
+				$mailer->AddAddress($arrayList['username']);
+				$forSending = 1;
+			}
+
+			$mailer->IsHTML(true);
+			if($forSending){
+				if(!$mailer->Send()) {
+					$error = 'Mail error: '.$mailer->ErrorInfo; 
+					return $error;
+				} else {
+					$error = '';
+					return $error;
+				}
+			} else return '';
+		}
+	}
+
 	public function search_survey(){
 		include('course_temp.php');
 		$me = new course_temp;

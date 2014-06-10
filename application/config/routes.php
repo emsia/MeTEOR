@@ -63,6 +63,7 @@ $route['changePassword/(:any)'] = 'pages/changePassword/$1';
 $route['managers/status'] = 'managers/status';
 $route['managers/promote'] = 'managers/promote';
 $route['managers/create'] = 'managers/create';
+$route['managers/delete'] = 'managers/delete';
 $route['managers/(:any)'] = 'managers/view/$1';
 $route['managers/search_results'] = 'managers/search_results';
 

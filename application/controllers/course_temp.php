@@ -436,9 +436,10 @@ class course_temp extends CI_Controller {
 		$accomodationRemarks = $this->input->post("accomRemarks");
 		$airfare = $this->input->post("air");
 		$airfareRemarks = $this->input->post("airRemarks");
-		$totalexp = $foodexp + $accommodation + $transpo + $air;
+		$totalexp = $foodexp + $accommodation + $transpo + $airfare;
 
 		$message = array();
+		$message['name'] = $name;
 		$message['course_id'] = $course_id;
 
 		$data['courses'] = $this->course_model->get_courses(1);
@@ -509,7 +510,7 @@ class course_temp extends CI_Controller {
 		$this->email->set_newline("\r\n");
 		$this->email->set_priority(1);*/
 		
-		if( !empty($message['description']) || !empty($message['venue']) || !empty($message['start']) || !empty($message['end'])){
+		if( !empty($message['description']) || !empty($message['venue']) || !empty($message['start']) || !empty($message['end']) || !empty($message['endTime']) || !empty($message['startTime'])){
 			//$msg = "The course ".$message['name']." you've enrolled, received changes as follows:\n\n";
 			
 			//$msg .="============================================================\n";

@@ -35,6 +35,8 @@
 			if(!empty($venue) ) echo "<br/>The Venue is now on ".$venue;
 			if(!empty($start) ) echo "<br/>The starting date is now on ".date( 'F j\, Y', strtotime($start))." ";
 			if(!empty($end) ) echo "<br/>and the ending date is now on ".date( 'F j\, Y', strtotime($end)).".";
+			if(!empty($startTime) ) echo "<br/>and the starting time is now on ".date( 'h:i A', strtotime($startTime)).".";
+			if(!empty($endTime) ) echo "<br/>up to ".date( 'h:i A', strtotime($endTime)).".";
 			echo "<br/><br/>----------------------------------------------------------------------------------------------------------------------------------------------------------------------<br/><br/>";
 			
 			echo "If You have any comments, suggestions, and reactions, feel free to contact us at <a style='color: #0088cc; text-decoration: none; font-size: 15px' href='localhost/meteor'>localhost/meteor</a>.<br/>Thank you for registering!";

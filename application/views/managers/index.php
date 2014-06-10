@@ -8,6 +8,13 @@
 	}
 </style>
 
+<script type="text/javascript">
+	window.setTimeout("closeHelpDiv();", 3000);
+	function closeHelpDiv(){
+		document.getElementById("helpdiv").style.display= "none";
+	}
+</script>
+
 <div id="addManeger" data-backdrop="static" data-keyboard="false" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-header palette-alizarin">
   	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -150,6 +157,24 @@
 		<?php echo form_close();?>
 		<hr>
 
+		<?php if(!empty($message) && !$error){ ?>
+		<div class="panel panel-danger">
+		  <div class="panel-heading">Warning!</div>
+		  <div class="panel-body">
+		    <?php echo $message; ?>
+		  </div>
+		</div>
+		<?php } ?>
+
+		<?php if(!empty($message) && $error){ ?>
+		<div id="helpdiv" class="panel panel-primary">
+		  <div class="panel-heading">Successful!</div>
+		  <div class="panel-body">
+		    <?php echo $message; ?>
+		  </div>
+		</div>
+		<?php } ?>
+
 		<div class="panel panel-success">
 		  <div class="panel-heading"><?php if(!isset($search)){?>Managers List<?php }else{ ?>Search Results<?php }?></div>
 		  <table class="table table-striped">
@@ -157,8 +182,9 @@
 				<tr>
 					<th style="width: 3%"></th>
 					<th style="width: 3%"></th>
+					<th style="width: 3%"></th>
 					<th style="width: 22%" ><center>Last Name</center></th>
-					<th style="width: 25%" ><center>First Name</center></th>
+					<th style="width: 22%" ><center>First Name</center></th>
 					<th style="width: 32%"><center>Email</center></th>
 					<th style="width: 15%"><center>Status</center></th>
 				</tr>
@@ -206,7 +232,7 @@
 				
 							<input type='hidden' name='user_id' value='<?php echo $id[$i]; ?>' />		
 							<input type='hidden' name='status' value='<?php echo $status[$i]; ?>' />
-							<button class='btn btn-danger' type='submit' style='padding: 5px' data-toggle="tooltip" data-trigger="hover" data-placement="top" title data-original-title="Enable Manager" name='submit'><i class="glyphicon glyphicon-play"></i></button>
+							<button class='btn btn-success' type='submit' style='padding: 5px' data-toggle="tooltip" data-trigger="hover" data-placement="top" title data-original-title="Enable Manager" name='submit'><i class="glyphicon glyphicon-play"></i></button>
 												
 						<?php echo form_close(); ?>
 					
@@ -222,6 +248,17 @@
 						<?php echo form_close(); ?>
 					
 					<?php } ?>
+				</td>
+				<td>
+					<?php $this->load->helper('form');
+						echo validation_errors(); 
+						echo form_open('managers/delete' ); ?>
+
+							<input type='hidden' name='id' value='<?php echo $id[$i]; ?>' />		
+							<input type='hidden' name='role' value='<?php echo $role[$i]; ?>' />
+							<button class='btn btn-danger' style='padding: 5px' data-toggle="tooltip" data-trigger="hover" data-placement="top" title data-original-title="Delete Manager" type='submit' onclick="return confirm('Are you sure you want to delete this manager?')" name='submit'><i class="glyphicon glyphicon-minus"></i></button>
+										
+						<?php echo form_close(); ?>
 				</td>
 				<td class="dataf"><center><?php echo $lastname[$i]; ?></center></td>
 				<td class="dataf"><center><?php echo $firstname[$i]; ?></center></td>

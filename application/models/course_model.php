@@ -237,12 +237,12 @@ class course_model extends CI_Model {
 			$this->db->update('courses', $data); 
 		}		
 		if( !empty($message['startTime']) )	{
-			$data = array('startTime' => $message['startTime'] );
+			$data = array('startTime' => date('H:i ',strtotime($message['startTime'])) );
 			$this->db->where('id', $id);
 			$this->db->update('courses', $data); 
 		}
 		if( !empty($message['endTime']) )	{
-			$data = array('endTime' => $message['endTime'] );
+			$data = array('endTime' => date('H:i', strtotime($message['endTime'])) );
 			$this->db->where('id', $id);
 			$this->db->update('courses', $data); 
 		}
