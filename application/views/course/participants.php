@@ -85,14 +85,12 @@
 						</td>
 						<td class="buttontable">
 							<?php
-								$stat = ($var>0)?1:0;
-
 								$this->load->helper('form');
 								echo form_open('validation/removeStudent');
 								echo "<input type='hidden' name='temp' value='".$participant_item['user_id']."' />";
 								echo "<input type='hidden' name='course_id' value='".$id."' />";
 								echo "<input type='hidden' name='tempId' value='".$temporary."' />";	
-								echo "<input type='hidden' name='status' value='".$stat."' />";	
+								echo "<input type='hidden' name='status' value='".$var2."' />";	
 								if(!$man) echo "<input type='hidden' name='manager' value='0' />";
 								else echo "<input type='hidden' name='manager' value='1' />"; ?>
 								<button style='padding: 5px'; data-toggle="tooltip" data-trigger="hover" data-placement="top" title data-original-title="Remove Participant" onclick="return confirm('Are you sure you want to remove this participant from this course?')" class='btn btn-danger' type='submit' name='submit' ><i class="glyphicon glyphicon-minus"></i></button>

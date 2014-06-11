@@ -343,13 +343,13 @@ class course_model extends CI_Model {
 	
 	public function fetch_cancelled( $id )
 	{	
-		$query = $this->db->get_where('cancelled', array('course_id' => $id) );
+		$query = $this->db->get_where('cancel_courses', array('course_id' => $id) );
 		return $query;
 	}
 	
 	public function fetch_dissolved( $id )
 	{	
-		$query = $this->db->get_where('dissolved', array('course_id' => $id) );
+		$query = $this->db->get_where('dissolved_courses', array('course_id' => $id) );
 		return $query;
 	}
 	
@@ -562,6 +562,19 @@ class course_model extends CI_Model {
 	
 	private function check_paid( $data )
 	{
+
+		$this->db->where('course_id', $data );
+		$query1 = $this->db->get('cancel_courses');
+		$query1 = $query1->result_array();
+
+		if(!count($query1)){
+			$data1 = array(
+				'course_id' => $data,
+				'date' => date("Y-m-d H:i:s"),
+			);
+			$this->db->insert('cancel_courses', $data1);
+		}
+
 		$query = $this->db->get_where('payment', array('course_id' => $data));
 		$array1 = $query->row_array();
 		
@@ -606,6 +619,18 @@ class course_model extends CI_Model {
 	
 	private function check_reserved( $data )
 	{
+		$this->db->where('course_id', $data );
+		$query1 = $this->db->get('dissolved_courses');
+		$query1 = $query1->result_array();
+
+		if(!count($query1)){
+			$data1 = array(
+				'course_id' => $data,
+				'date' => date("Y-m-d H:i:s"),
+			);
+			$this->db->insert('dissolved_courses', $data1);
+		}
+
 		$query = $this->db->get_where('reserved', array('course_id' => $data));
 		$array1 = $query->row_array();
 		if( !empty( $array1['id']) ){				

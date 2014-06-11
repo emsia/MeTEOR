@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2.2
+-- version 4.1.12
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 10, 2014 at 05:53 PM
--- Server version: 5.5.27
--- PHP Version: 5.4.7
+-- Host: localhost
+-- Generation Time: Jun 11, 2014 at 03:40 AM
+-- Server version: 5.6.16
+-- PHP Version: 5.5.11
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -186,17 +186,40 @@ CREATE TABLE IF NOT EXISTS `cancelled` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `course_id` (`course_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `cancelled`
 --
 
 INSERT INTO `cancelled` (`id`, `user_id`, `course_id`, `refunded`, `date`, `untag`) VALUES
-(1, 248, 18, 1, '2014-06-05 08:54:01', 1),
-(2, 1, 23, -1, '2014-06-10 22:02:30', 0),
-(3, 1, 24, -1, '2014-06-10 22:17:50', 0),
-(4, 1, 25, -1, '2014-06-10 22:31:38', 0);
+(2, 248, 24, 1, '2014-06-11 08:51:52', 0),
+(3, 248, 22, 1, '2014-06-11 08:52:30', 0),
+(4, 248, 23, 1, '2014-06-11 03:17:00', 1),
+(5, 1, 18, -1, '2014-06-11 09:18:53', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cancel_courses`
+--
+
+CREATE TABLE IF NOT EXISTS `cancel_courses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_id` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `course_id` (`course_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `cancel_courses`
+--
+
+INSERT INTO `cancel_courses` (`id`, `course_id`, `date`) VALUES
+(1, 24, '2014-06-11 02:51:55'),
+(2, 22, '2014-06-11 02:52:33'),
+(3, 18, '2014-06-11 03:18:56');
 
 -- --------------------------------------------------------
 
@@ -359,7 +382,7 @@ CREATE TABLE IF NOT EXISTS `courses` (
   `accomodationRemarks` text,
   `accomodation` int(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 --
 -- Dumping data for table `courses`
@@ -374,12 +397,11 @@ INSERT INTO `courses` (`id`, `name`, `description`, `cost`, `start`, `end`, `ava
 (14, 'eUP SAIS Data Dictionary Standardization workshop for University Registrars', 'To standardize OUR''s data dictionary for all UP CU''s', 0, '2014-02-06', '2014-02-08', 32, 0, 8, 'Camayan Beach Resort Subic, Zambales', '09:00:00', '', 0, 0, 0, 0, '17:00:00', 6, NULL, NULL, NULL, NULL, NULL, 0),
 (15, 'eUP HRIS End User Training', 'Preparing for Go Live.', 0, '2014-05-30', '2014-05-31', 44, 0, 0, 'UP Visayas', '09:00:00', 'eUP HRIS Team\nAVPD Jaime Caro\nUP Visayas Officials\nUPV HRDO End Users', 49600, 3000, 25600, 90200, '17:00:00', 0, 'ITENERARY: UPITDC- NAIA- ILO AIRPORT- UPV ILO\n                          UPV ILO- ILO AIRPORT- NAIA- UPITDC\n\n1. Land Trasportation\n-> UPITDC-NAIA Taxi Fare  = 1000.00 Php\n->ILOILO AIRPORT-UPV ILO = 500.00 Php\n-> UPV ILO-ILO AIRPORT = 500.00 Php\n-> NAIA-UPITDC Taxi Fare = 1000.00 Php', 'Cebu Pacific Round trip fare: 6 Pax X 3,600.00 \nphp = 21,600.00 Php\nPAL Round trip fare: 1 Pax X 4,000.00 Php = 4,000.00 Php', 'The EUT will prepare intended users of HRIS from the HR Office for Go live.', 'UPV Attendees\r\n400.00 Php X 44 Pax X 2 days = 35,200.00 Php\r\n\r\neUP Team\r\n800.00 Php X 6 Pax X 3 days = 14,400.00 Php', '1,000.00 Php X 6 X PAX X 2 Nights = 12,000.00 Php', 12000),
 (16, 'Data Mining', 'Mining many data', 0, '2014-05-25', '2014-05-31', 10, 0, 0, 'AS 101', '09:00:00', 'Students from UP', 5000, 3000, 0, 8000, '05:00:00', 0, 'Jeep -- ikot', 'Naglakad lang kami', 'To excavate data in places.', 'All are cheese.', 'None', 0),
-(18, 'CS 199', 'Thesis', 1500, '2014-05-01', '2014-12-31', 3, 0, 1, 'DCS', '09:00:00', 'Students', 0, 0, 0, 0, '05:00:00', 0, 'KKB', 'Lakad lang.', 'To publish a paper', 'KKB', 'KKB', 0),
+(18, 'CS 199', 'Thesis', 1500, '2014-05-01', '2014-12-31', 3, 0, 0, 'DCS', '09:00:00', 'Students', 0, 0, 0, 0, '05:00:00', 0, 'KKB', 'Lakad lang.', 'To publish a paper', 'KKB', 'KKB', 0),
 (19, 'Only', 'Test Only', 0, '2014-05-29', '2014-05-30', 2, 0, 0, 'DCS', '04:00:00', '', 0, 0, 0, 0, '05:00:00', 0, 'wala', 'wala', 'Basta', 'wala', 'wala', 0),
-(22, 'CS 195', 'Apprenticeship', 1500, '2014-06-11', '2014-07-31', 3, 1, 0, 'DCS', '09:00:00', 'students', 1000, 2000, 0, 3000, '17:00:00', 0, 'Galing Bulacan', 'Lakad lang kami', 'To gain expereience', 'Eat all you can', 'DCS lang kami', 0),
-(23, 'Ito ay test laman', 'fsdfsdf', 0, '2014-06-11', '2014-06-12', 2, 0, 0, 'TBA', '09:00:00', '', 0, 0, 0, 0, '16:00:00', 7, 'dsad', 'dsad', 'Wala', 'asdas', 'dsad', 0),
-(24, 'Testing lang ito.', 'fsdfsdf', 0, '2014-06-11', '2014-06-12', 2, 0, 0, 'TBA', '09:00:00', 'students', 0, 0, 0, 0, '16:00:00', 7, 'xzx', 'xzx', 'zxczc', 'xzx', 'xz', 0),
-(25, 'Test Only', 'fsdfsdf', 0, '2014-06-11', '2014-06-12', 2, 0, 0, 'TBA', '09:00:00', 'fsdf', 0, 0, 0, 0, '16:00:00', 7, 'asd', 'sadasd', 'dsad', 'asdas', 'adasd', 0);
+(22, 'CS 195', 'Apprenticeship', 1500, '2014-06-01', '2014-07-31', 3, 0, 0, 'DCS', '08:00:00', 'students', 1000, 2000, 0, 3000, '17:00:00', 0, 'Galing Bulacan', 'Lakad lang kami', 'To gain expereience', 'Eat all you can', 'DCS lang kami', 0),
+(23, 'ddasd', 'sadasd', 0, '2014-06-11', '2014-06-12', 3, 0, 1, 'dsad', '09:45:00', 'dsad', 0, 0, 0, 0, '11:45:00', 0, 'dasd', 'das', 'dsad', 'sdf', 'dsad', 0),
+(24, 'dsadas', 'dasd', 0, '2014-06-12', '2014-06-13', 2, 0, 0, 'dsad', '08:30:00', '', 0, 0, 0, 0, '09:00:00', 7, NULL, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -435,17 +457,38 @@ CREATE TABLE IF NOT EXISTS `dissolved` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `course_id` (`course_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `dissolved`
 --
 
 INSERT INTO `dissolved` (`id`, `user_id`, `course_id`, `date`) VALUES
-(1, 1, 23, '2014-06-10 22:02:30'),
-(2, 1, 24, '2014-06-10 22:17:50'),
-(3, 1, 25, '2014-06-10 22:31:38'),
-(5, 248, 22, '2014-06-10 23:48:28');
+(2, 248, 23, '2014-06-11 03:11:22'),
+(3, 1, 18, '2014-06-11 09:18:53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dissolved_courses`
+--
+
+CREATE TABLE IF NOT EXISTS `dissolved_courses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_id` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `course_id` (`course_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `dissolved_courses`
+--
+
+INSERT INTO `dissolved_courses` (`id`, `course_id`, `date`) VALUES
+(1, 24, '2014-06-11 02:51:55'),
+(2, 22, '2014-06-11 02:52:33'),
+(3, 18, '2014-06-11 03:18:56');
 
 -- --------------------------------------------------------
 
@@ -497,7 +540,7 @@ CREATE TABLE IF NOT EXISTS `forsending` (
   PRIMARY KEY (`id`),
   KEY `forSending_ibfk_1` (`user_id`),
   KEY `forSending_ibfk_2` (`tempId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `forsending`
@@ -549,18 +592,14 @@ CREATE TABLE IF NOT EXISTS `managers` (
   `status` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `managers`
 --
 
 INSERT INTO `managers` (`id`, `user_id`, `status`) VALUES
-(1, 249, 1),
-(2, 250, 1),
-(3, 251, 1),
-(4, 252, 1),
-(5, 314, 1);
+(1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -681,73 +720,73 @@ CREATE TABLE IF NOT EXISTS `payment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `amount` int(11) NOT NULL,
   `remarks` varchar(255) DEFAULT NULL,
-  `ornumber` varchar(55) NOT NULL,
+  `ornumber` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `course_id` int(11) NOT NULL,
   `date` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `course_id` (`course_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=83 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=84 ;
 
 --
 -- Dumping data for table `payment`
 --
 
 INSERT INTO `payment` (`id`, `amount`, `remarks`, `ornumber`, `user_id`, `course_id`, `date`) VALUES
-(1, 500, NULL, '8', 248, 12, '2014-01-09 00:00:00'),
-(4, 0, 'free', '0', 253, 7, '2014-01-09 11:42:02'),
-(5, 0, 'free', '0', 254, 7, '2014-01-09 13:03:25'),
-(6, 0, 'free', '0', 255, 7, '2014-01-09 13:30:48'),
-(7, 0, 'free', '0', 256, 7, '2014-01-09 14:10:34'),
-(8, 0, NULL, '0', 251, 7, '2014-01-09 00:00:00'),
-(14, 0, 'free', '0', 259, 8, '2014-01-13 12:00:16'),
-(19, 0, 'free', '0', 261, 8, '2014-01-13 13:25:14'),
-(21, 0, 'free', '0', 270, 8, '2014-01-13 13:25:32'),
-(22, 0, 'free', '0', 265, 8, '2014-01-13 13:25:50'),
-(25, 0, 'free', '0', 263, 8, '2014-01-13 13:27:20'),
-(26, 0, 'free', '0', 274, 8, '2014-01-13 13:29:28'),
-(28, 0, 'free', '0', 278, 8, '2014-01-13 13:32:41'),
-(29, 0, 'free', '0', 269, 8, '2014-01-13 13:33:33'),
-(31, 0, 'free', '0', 281, 8, '2014-01-13 13:36:22'),
-(32, 0, 'free', '0', 279, 8, '2014-01-13 13:36:27'),
-(33, 0, 'free', '0', 275, 8, '2014-01-13 13:38:41'),
-(34, 0, 'free', '0', 276, 8, '2014-01-13 13:42:02'),
-(35, 0, 'free', '0', 271, 8, '2014-01-13 13:43:29'),
-(36, 0, 'free', '0', 283, 8, '2014-01-13 13:51:04'),
-(38, 0, 'free', '0', 282, 8, '2014-01-13 14:00:20'),
-(39, 0, 'free', '0', 284, 8, '2014-01-13 14:09:06'),
-(40, 0, 'free', '0', 267, 8, '2014-01-13 15:41:54'),
-(45, 0, 'free', '0', 266, 8, '2014-01-13 15:46:48'),
-(46, 0, 'free', '0', 287, 8, '2014-01-13 15:52:48'),
-(47, 0, 'free', '0', 288, 8, '2014-01-13 22:28:13'),
-(48, 0, 'free', '0', 289, 8, '2014-01-14 06:51:23'),
-(49, 0, 'free', '0', 273, 8, '2014-01-14 08:31:12'),
-(50, 0, 'free', '0', 262, 8, '2014-01-14 09:04:40'),
-(51, 0, 'free', '0', 260, 8, '2014-01-14 09:16:24'),
-(54, 0, 'free', '0', 290, 8, '2014-01-15 09:13:17'),
-(58, 0, 'free', '0', 291, 8, '2014-01-16 10:33:38'),
-(59, 0, 'free', '0', 249, 14, '2014-02-03 11:41:17'),
-(60, 0, 'free', '0', 293, 14, '2014-02-03 11:45:50'),
-(61, 0, 'free', '0', 294, 14, '2014-02-03 11:58:46'),
-(62, 0, 'free', '0', 251, 14, '2014-02-03 13:03:58'),
-(63, 0, 'free', '0', 296, 14, '2014-02-03 13:04:17'),
-(64, 0, 'free', '0', 254, 14, '2014-02-03 13:05:04'),
-(65, 0, 'free', '0', 255, 14, '2014-02-03 13:05:48'),
-(66, 0, 'free', '0', 295, 14, '2014-02-03 15:58:58'),
-(67, 0, 'free', '0', 297, 13, '2014-02-03 16:09:52'),
-(68, 0, 'free', '0', 255, 13, '2014-02-03 16:28:24'),
-(69, 0, 'free', '0', 298, 13, '2014-02-03 16:31:59'),
-(70, 0, 'free', '0', 300, 13, '2014-02-03 21:01:01'),
-(71, 0, 'free', '0', 301, 13, '2014-02-03 22:45:05'),
-(72, 0, 'free', '0', 302, 14, '2014-02-03 23:40:14'),
-(73, 0, 'free', '0', 303, 14, '2014-02-04 09:22:42'),
-(74, 0, 'free', '0', 305, 14, '2014-02-04 13:43:29'),
-(75, 0, 'free', '0', 306, 13, '2014-02-04 14:32:29'),
-(76, 0, 'free', '0', 258, 14, '2014-02-05 21:00:09'),
-(77, 0, 'free', '0', 307, 14, '2014-02-05 21:11:47'),
-(78, 0, 'free', '0', 308, 13, '2014-02-07 09:50:01'),
-(81, 0, 'free', '0', 248, 8, '2014-06-05 10:30:12');
+(1, 500, NULL, 8, 248, 12, '2014-01-09 00:00:00'),
+(4, 0, 'free', 0, 253, 7, '2014-01-09 11:42:02'),
+(5, 0, 'free', 0, 254, 7, '2014-01-09 13:03:25'),
+(6, 0, 'free', 0, 255, 7, '2014-01-09 13:30:48'),
+(7, 0, 'free', 0, 256, 7, '2014-01-09 14:10:34'),
+(8, 0, NULL, 0, 251, 7, '2014-01-09 00:00:00'),
+(14, 0, 'free', 0, 259, 8, '2014-01-13 12:00:16'),
+(19, 0, 'free', 0, 261, 8, '2014-01-13 13:25:14'),
+(21, 0, 'free', 0, 270, 8, '2014-01-13 13:25:32'),
+(22, 0, 'free', 0, 265, 8, '2014-01-13 13:25:50'),
+(25, 0, 'free', 0, 263, 8, '2014-01-13 13:27:20'),
+(26, 0, 'free', 0, 274, 8, '2014-01-13 13:29:28'),
+(28, 0, 'free', 0, 278, 8, '2014-01-13 13:32:41'),
+(29, 0, 'free', 0, 269, 8, '2014-01-13 13:33:33'),
+(31, 0, 'free', 0, 281, 8, '2014-01-13 13:36:22'),
+(32, 0, 'free', 0, 279, 8, '2014-01-13 13:36:27'),
+(33, 0, 'free', 0, 275, 8, '2014-01-13 13:38:41'),
+(34, 0, 'free', 0, 276, 8, '2014-01-13 13:42:02'),
+(35, 0, 'free', 0, 271, 8, '2014-01-13 13:43:29'),
+(36, 0, 'free', 0, 283, 8, '2014-01-13 13:51:04'),
+(38, 0, 'free', 0, 282, 8, '2014-01-13 14:00:20'),
+(39, 0, 'free', 0, 284, 8, '2014-01-13 14:09:06'),
+(40, 0, 'free', 0, 267, 8, '2014-01-13 15:41:54'),
+(45, 0, 'free', 0, 266, 8, '2014-01-13 15:46:48'),
+(46, 0, 'free', 0, 287, 8, '2014-01-13 15:52:48'),
+(47, 0, 'free', 0, 288, 8, '2014-01-13 22:28:13'),
+(48, 0, 'free', 0, 289, 8, '2014-01-14 06:51:23'),
+(49, 0, 'free', 0, 273, 8, '2014-01-14 08:31:12'),
+(50, 0, 'free', 0, 262, 8, '2014-01-14 09:04:40'),
+(51, 0, 'free', 0, 260, 8, '2014-01-14 09:16:24'),
+(54, 0, 'free', 0, 290, 8, '2014-01-15 09:13:17'),
+(58, 0, 'free', 0, 291, 8, '2014-01-16 10:33:38'),
+(59, 0, 'free', 0, 249, 14, '2014-02-03 11:41:17'),
+(60, 0, 'free', 0, 293, 14, '2014-02-03 11:45:50'),
+(61, 0, 'free', 0, 294, 14, '2014-02-03 11:58:46'),
+(62, 0, 'free', 0, 251, 14, '2014-02-03 13:03:58'),
+(63, 0, 'free', 0, 296, 14, '2014-02-03 13:04:17'),
+(64, 0, 'free', 0, 254, 14, '2014-02-03 13:05:04'),
+(65, 0, 'free', 0, 255, 14, '2014-02-03 13:05:48'),
+(66, 0, 'free', 0, 295, 14, '2014-02-03 15:58:58'),
+(67, 0, 'free', 0, 297, 13, '2014-02-03 16:09:52'),
+(68, 0, 'free', 0, 255, 13, '2014-02-03 16:28:24'),
+(69, 0, 'free', 0, 298, 13, '2014-02-03 16:31:59'),
+(70, 0, 'free', 0, 300, 13, '2014-02-03 21:01:01'),
+(71, 0, 'free', 0, 301, 13, '2014-02-03 22:45:05'),
+(72, 0, 'free', 0, 302, 14, '2014-02-03 23:40:14'),
+(73, 0, 'free', 0, 303, 14, '2014-02-04 09:22:42'),
+(74, 0, 'free', 0, 305, 14, '2014-02-04 13:43:29'),
+(75, 0, 'free', 0, 306, 13, '2014-02-04 14:32:29'),
+(76, 0, 'free', 0, 258, 14, '2014-02-05 21:00:09'),
+(77, 0, 'free', 0, 307, 14, '2014-02-05 21:11:47'),
+(78, 0, 'free', 0, 308, 13, '2014-02-07 09:50:01'),
+(81, 0, 'free', 0, 248, 8, '2014-06-05 10:30:12');
 
 -- --------------------------------------------------------
 
@@ -816,7 +855,7 @@ CREATE TABLE IF NOT EXISTS `recentactivities` (
   `date` datetime NOT NULL,
   `status` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `recentactivities`
@@ -836,11 +875,9 @@ INSERT INTO `recentactivities` (`id`, `desc`, `course`, `date`, `status`) VALUES
 (11, 'ADD', '16', '2014-05-27 15:55:54', 2),
 (12, 'DELETE', '18', '2014-05-28 16:50:47', 2),
 (13, 'DELETE', '18', '2014-06-05 08:54:03', 2),
-(14, 'DELETE', '23', '2014-06-10 22:02:33', 2),
-(15, 'DELETE', '24', '2014-06-10 22:17:55', 2),
-(16, 'DELETE', '25', '2014-06-10 22:31:41', 2),
-(17, 'DELETE', '22', '2014-06-10 23:29:05', 2),
-(18, 'DELETE', '22', '2014-06-10 23:48:30', 2);
+(14, 'DELETE', '24', '2014-06-11 08:51:55', 2),
+(15, 'DELETE', '22', '2014-06-11 08:52:33', 2),
+(16, 'DELETE', '18', '2014-06-11 09:18:56', 2);
 
 -- --------------------------------------------------------
 
@@ -856,7 +893,7 @@ CREATE TABLE IF NOT EXISTS `reserved` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `course_id` (`course_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -892,10 +929,10 @@ CREATE TABLE IF NOT EXISTS `sessions_ios` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `shortform_all`
+-- Table structure for table `shortForm_all`
 --
 
-CREATE TABLE IF NOT EXISTS `shortform_all` (
+CREATE TABLE IF NOT EXISTS `shortForm_all` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `c_unit` varchar(50) NOT NULL,
@@ -1038,7 +1075,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `form` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=315 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=311 ;
 
 --
 -- Dumping data for table `users`
@@ -1047,9 +1084,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `lastname`, `role`, `salt`, `verified`, `slug`, `middlename`, `form`) VALUES
 (1, 'meteor.upitdc@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'UpItdc', 'Admin', 0, '', 1, 'GQ3U4JT8Tl5jMofHMTz9GzEu7', 'EUP', 0),
 (98, 'managerone@mail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Master', 'Manager', 1, '', 1, '121654hfg1h2g1h', NULL, 0),
-(248, 'esia.rizal@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Efren Ver', 'Sia', 2, '', 1, 'jbvWLIuELVjeMpJnzjgvtJseh', 'Monesit', 1),
+(248, 'esia.rizal@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Efren Ver', 'Sia', 2, '', 1, 'jbvWLIuELVjeMpJnzjgvtJseh', 'Monesit', NULL),
 (249, 'kscruz@ittc.up.edu.ph', '6b18bc13b3936a27eb26a414870eca6e412115eb', 'Kenneth Isaac', 'Dela Cruz', 1, '', 1, 'HtyKZ8Pawm4SZoEt1BzvK2ie7', NULL, 0),
-(250, 'lbcatalogo@ittc.up.edu.ph', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Lemuel', 'Catalogo', 1, '', 1, 'sefwer87465fdas', NULL, 0),
 (251, 'cnforteza@ittc.up.edu.ph', 'c4cdaf9bafa9b0b4dc4087ff7189fdb0dbafc6a6', 'Carlos', 'Forteza', 0, '', 1, '56sdf465sd4fdsferw687', NULL, 0),
 (252, 'efren.aldave@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Efren', 'Sia', 1, '', 1, 'fdfw987r56wefSDad', 'Aldave', 0),
 (253, 'rmpancho@ittc.up.edu.ph', '6ca933944c990f70b33e7432077fc34f1e24b9ea', 'Richmon', 'Pancho', 2, '', 1, 'NLBIwLwEjMpIH9RzC5EVij5NI', NULL, 0),
@@ -1109,8 +1145,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `lastname`, `rol
 (307, 'records@upou.edu.ph', '11184cc70c51e2d8b4177ecdd2f81494c0730a30', 'Rhodora', 'Pamulaklakin', 2, '', 1, 'R2N13n5jclVYz9mxyrfHClo4O', NULL, 0),
 (308, 'jessicakcarino@gmail.com', '54ac27b445b73c5a5c44cfdb097305c2b16855ad', 'Jessica', 'Carino', 2, '', 1, 'oWqDSPDKgr1d9Cbk9oQ3yF0Y7', NULL, 0),
 (309, 'clramos@upsitf.org', 'f26b85802a61c49cde714733944a206422d298e0', 'Cha', 'Ramos', 2, '', 1, '1DCT4fcEqU4qtrj7J1buCaglG', NULL, 0),
-(310, 'paulopaje@gmail.com', 'a66c3c33580b15c33315abe1bb9a2aa39171948b', 'Paulo Noel G', 'Paje', 2, '', 1, 'oXp4Fb72z6MJNSNBClU4BRVUj', NULL, 0),
-(314, 'evsia@ittc.up.edu.ph', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Efrelyn', 'Sia', 1, '', 1, 'Zx6cVRf7eX8xVkprFuGuyCbfY', NULL, 0);
+(310, 'paulopaje@gmail.com', 'a66c3c33580b15c33315abe1bb9a2aa39171948b', 'Paulo Noel G', 'Paje', 2, '', 1, 'oXp4Fb72z6MJNSNBClU4BRVUj', NULL, 0);
 
 --
 -- Constraints for dumped tables
@@ -1140,6 +1175,12 @@ ALTER TABLE `awards`
 ALTER TABLE `cancelled`
   ADD CONSTRAINT `cancelled_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `cancelled_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
+
+--
+-- Constraints for table `cancel_courses`
+--
+ALTER TABLE `cancel_courses`
+  ADD CONSTRAINT `cancel_courses_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
 
 --
 -- Constraints for table `college_history`
@@ -1174,6 +1215,12 @@ ALTER TABLE `dissolved`
   ADD CONSTRAINT `dissolved_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
 
 --
+-- Constraints for table `dissolved_courses`
+--
+ALTER TABLE `dissolved_courses`
+  ADD CONSTRAINT `dissolved_courses_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
+
+--
 -- Constraints for table `employment_history`
 --
 ALTER TABLE `employment_history`
@@ -1196,7 +1243,7 @@ ALTER TABLE `landline`
 -- Constraints for table `managers`
 --
 ALTER TABLE `managers`
-  ADD CONSTRAINT `managers_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `managers_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `mobilenumbers`
@@ -1231,9 +1278,9 @@ ALTER TABLE `sessions`
   ADD CONSTRAINT `sessions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `shortform_all`
+-- Constraints for table `shortForm_all`
 --
-ALTER TABLE `shortform_all`
+ALTER TABLE `shortForm_all`
   ADD CONSTRAINT `shortForm_all_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --

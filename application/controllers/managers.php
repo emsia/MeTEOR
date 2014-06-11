@@ -59,8 +59,8 @@ class managers extends CI_Controller {
 		$this->db->where('user_id', $user_id);
 		$this->db->delete('managers');
 
-		$this->db->where('id', $user_id);
-		$this->db->delete('users');
+		//$this->db->where('id', $user_id);
+		//$this->db->delete('users');
 
 		$this->index(1,'Manager Successfully deleted.');
 		return;
