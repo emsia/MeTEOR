@@ -932,6 +932,25 @@ class course_temp extends CI_Controller {
 		return $message;
 	}
 
+	public function normalize_str($str)
+	{
+		$invalid = array('Š'=>'S', 'š'=>'s', 'Đ'=>'Dj', 'đ'=>'dj', 'Ž'=>'Z', 'ž'=>'z',
+		'Č'=>'C', 'č'=>'c', 'Ć'=>'C', 'ć'=>'c', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A',
+		'Ä'=>'A', 'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E',
+		'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'Ñ'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O',
+		'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y',
+		'Þ'=>'B', 'ß'=>'Ss', 'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a',
+		'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e',  'ë'=>'e', 'ì'=>'i', 'í'=>'i',
+		'î'=>'i', 'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o',
+		'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y',  'ý'=>'y', 'þ'=>'b',
+		'ÿ'=>'y', 'Ŕ'=>'R', 'ŕ'=>'r', "`" => "'", "´" => "'", "„" => ",", "`" => "'", '&' => 'and', '/' => 'or',
+		"´" => "'", "“" => "\"", "”" => "\"", "´" => "'", "&acirc;€™" => "'", "{" => "",
+		"~" => "", "–" => "-", "’" => "'");
+	 
+		$str = str_replace(array_keys($invalid), array_values($invalid), $str);
+		 
+		return $str;
+	}
 	public function printEventForms(){
 		$this->load->library('word');
 		$this->load->library('zip');
@@ -972,7 +991,7 @@ class course_temp extends CI_Controller {
 
 		$data['deptTrue'] = $num;
 		$count = count($data['name']);
-		//echo $count;
+
 		$a = array();
 		$temp_name = ''; $count_name = 1;
 
@@ -980,9 +999,9 @@ class course_temp extends CI_Controller {
 			$word = new PHPWord();
 			$document = $word->loadTemplate($_SERVER['DOCUMENT_ROOT'].'/meteor/template.docx');
 
-			$name = $data['name'][$i];
+			$name = $this->normalize_str($data['name'][$i]);
 			//$description = nl2br($data['description'][$i]);
-			$objectives = nl2br($data['objectives'][$i]);
+			$objectives = nl2br(utf8_encode($data['objectives'][$i]));
 
 			$message = $this->date_string($data['start'][$i], $data['end'][$i]);
 
@@ -1012,23 +1031,23 @@ class course_temp extends CI_Controller {
 			$airfareRemarks = nl2br($data['airfareRemarks'][$i]);
 			$totalexp = number_format($data['totalexp'][$i],2);
 
-			$document->setValue('name', $name);
-			$document->setValue('objectives', $objectives);
-			$document->setValue('message', $message);
+			$document->setValue('name', $this->normalize_str($name));
+			$document->setValue('objectives', $this->normalize_str($objectives));
+			$document->setValue('message', $this->normalize_str($message));
 			$document->setValue('startTime', $startTime);
 			$document->setValue('endTime', $endTime);
 			$document->setValue('hours', $hours);
 			$document->setValue('venue', $venue);
-			$document->setValue('attendees', $attendees);
+			$document->setValue('attendees', $this->normalize_str($attendees));
 			$document->setValue('available', $available);
 			$document->setValue('food', $food);
-			$document->setValue('foodRemarks', $foodRemarks);
+			$document->setValue('foodRemarks', $this->normalize_str($foodRemarks));
 			$document->setValue('accomodation', $accomodation);
-			$document->setValue('accomodationRemarks', $accomodationRemarks);
+			$document->setValue('accomodationRemarks', $this->normalize_str($accomodationRemarks));
 			$document->setValue('landTranspo', $landTranspo);
-			$document->setValue('landRemarks', $landRemarks);
+			$document->setValue('landRemarks', $this->normalize_str($landRemarks));
 			$document->setValue('airfare', $airfare);
-			$document->setValue('airfareRemarks', $airfareRemarks);
+			$document->setValue('airfareRemarks', $this->normalize_str($airfareRemarks));
 			$document->setValue('totalexp', $totalexp);
 
 			/*$mpdf = new mPDF('',    // mode - default ''
@@ -1069,10 +1088,10 @@ class course_temp extends CI_Controller {
 			//$mpdf->Output($filename);
 			$this->zip->read_file($filename);
 
-			unlink($filename);
+			//unlink($filename);
 		}					
 
-		$zipfilename = 'TRAINING / EVENT SCHEDULE FORM'.'.zip';
+		$zipfilename = 'TRAINING_EVENT_SCHEDULE_FORM'.'.zip';
 		$this->zip->download($zipfilename);
 		exit;		
 		//pdf here
