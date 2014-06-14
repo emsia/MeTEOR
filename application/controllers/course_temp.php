@@ -974,6 +974,7 @@ class course_temp extends CI_Controller {
 		$count = count($data['name']);
 		//echo $count;
 		$a = array();
+		$temp_name = ''; $count_name = 1;
 
 		for( $i = 0; $i < $count; $i++ ){
 			$word = new PHPWord();
@@ -1052,6 +1053,12 @@ class course_temp extends CI_Controller {
 			//$this->load->view('course/eventformPrint', $a);
 			$mpdf->WriteHTML($this->load->view("course/eventformPrint", $a, TRUE));
 			*/
+
+			if($temp_name != $name) $temp_name = $name;
+			else{
+				$name .= $count_name;
+				$count_name++;
+			}
 			$filename = $_SERVER['DOCUMENT_ROOT'].'/meteor/temp/'.$TITLE[$n].utf8_decode($name).'.docx';
 			$document->save($filename);
 			//header('Content-Description: File Transfer');
