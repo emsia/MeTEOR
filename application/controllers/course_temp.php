@@ -943,7 +943,7 @@ class course_temp extends CI_Controller {
 		'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e',  'ë'=>'e', 'ì'=>'i', 'í'=>'i',
 		'î'=>'i', 'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o',
 		'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y',  'ý'=>'y', 'þ'=>'b',
-		'ÿ'=>'y', 'Ŕ'=>'R', 'ŕ'=>'r', "`" => "'", "´" => "'", "„" => ",", "`" => "'", '&' => 'and', '/' => 'or',
+		'ÿ'=>'y', 'Ŕ'=>'R', 'ŕ'=>'r', "`" => "'", "´" => "'", "„" => ",", "`" => "'", '&' => 'and', '/' => ' or ',
 		"´" => "'", "“" => "\"", "”" => "\"", "´" => "'", "&acirc;€™" => "'", "{" => "",
 		"~" => "", "–" => "-", "’" => "'");
 	 
@@ -999,9 +999,9 @@ class course_temp extends CI_Controller {
 			$word = new PHPWord();
 			$document = $word->loadTemplate($_SERVER['DOCUMENT_ROOT'].'/meteor/template.docx');
 
-			$name = $this->normalize_str($data['name'][$i]);
+			$name = htmlspecialchars($this->normalize_str($data['name'][$i]));
 			//$description = nl2br($data['description'][$i]);
-			$objectives = nl2br(utf8_encode($data['objectives'][$i]));
+			$objectives = ($data['objectives'][$i]);
 
 			$message = $this->date_string($data['start'][$i], $data['end'][$i]);
 
@@ -1018,36 +1018,36 @@ class course_temp extends CI_Controller {
 			if( ($posAM1 && $posAM2) || ($posPM1 && $posPM2) ) $hours -= 0;
 			else $hours--;
 
-			$venue = nl2br($data['venue'][$i]);
-			$attendees = nl2br($data['attendees'][$i]);
+			$venue = ($data['venue'][$i]);
+			$attendees = ($data['attendees'][$i]);
 			$available = $data['available'][$i];
 			$food = number_format($data['food'][$i],2);
-			$foodRemarks = nl2br($data['foodRemarks'][$i]);
+			$foodRemarks = ($data['foodRemarks'][$i]);
 			$accomodation = number_format($data['accomodation'][$i],2);
-			$accomodationRemarks = nl2br($data['accomodationRemarks'][$i]);
+			$accomodationRemarks = ($data['accomodationRemarks'][$i]);
 			$landTranspo = number_format($data['landTranspo'][$i],2);
-			$landRemarks = nl2br($data['landRemarks'][$i]);
+			$landRemarks = ($data['landRemarks'][$i]);
 			$airfare = number_format($data['airfare'][$i],2);
-			$airfareRemarks = nl2br($data['airfareRemarks'][$i]);
+			$airfareRemarks = ($data['airfareRemarks'][$i]);
 			$totalexp = number_format($data['totalexp'][$i],2);
 
-			$document->setValue('name', $this->normalize_str($name));
-			$document->setValue('objectives', $this->normalize_str($objectives));
-			$document->setValue('message', $this->normalize_str($message));
+			$document->setValue('name', htmlspecialchars($name));
+			$document->setValue('objectives', htmlspecialchars($objectives));
+			$document->setValue('message', htmlspecialchars($message));
 			$document->setValue('startTime', $startTime);
 			$document->setValue('endTime', $endTime);
 			$document->setValue('hours', $hours);
-			$document->setValue('venue', $venue);
-			$document->setValue('attendees', $this->normalize_str($attendees));
+			$document->setValue('venue', htmlspecialchars($venue));
+			$document->setValue('attendees', htmlspecialchars($attendees));
 			$document->setValue('available', $available);
 			$document->setValue('food', $food);
-			$document->setValue('foodRemarks', $this->normalize_str($foodRemarks));
+			$document->setValue('foodRemarks', htmlspecialchars($foodRemarks));
 			$document->setValue('accomodation', $accomodation);
-			$document->setValue('accomodationRemarks', $this->normalize_str($accomodationRemarks));
+			$document->setValue('accomodationRemarks', htmlspecialchars($accomodationRemarks));
 			$document->setValue('landTranspo', $landTranspo);
-			$document->setValue('landRemarks', $this->normalize_str($landRemarks));
+			$document->setValue('landRemarks', htmlspecialchars($landRemarks));
 			$document->setValue('airfare', $airfare);
-			$document->setValue('airfareRemarks', $this->normalize_str($airfareRemarks));
+			$document->setValue('airfareRemarks', htmlspecialchars($airfareRemarks));
 			$document->setValue('totalexp', $totalexp);
 
 			/*$mpdf = new mPDF('',    // mode - default ''
@@ -1088,7 +1088,7 @@ class course_temp extends CI_Controller {
 			//$mpdf->Output($filename);
 			$this->zip->read_file($filename);
 
-			//unlink($filename);
+			unlink($filename);
 		}					
 
 		$zipfilename = 'TRAINING_EVENT_SCHEDULE_FORM'.'.zip';
@@ -1922,6 +1922,85 @@ class course_temp extends CI_Controller {
 
 		//if( !$manS ) $this->load->view('templates/footeradmin');
 		//else $this->load->view('templates/footerman');
+	}
+
+	public function dl_survey(){
+		$stylesheet1 = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/meteor/css/appearance_css.css');
+
+		$placeHeader = $_SERVER['DOCUMENT_ROOT'].'/meteor/css/images/docLogo2.png';
+		$mpdf = new mPDF('', 'LETTER', 0, 0, 0, 0, 40, 20, 0, 5,'P');
+		$mpdf->WriteHTML($stylesheet1,1);
+
+		$mpdf->SetHTMLHeader('<img src="'.$placeHeader.'" class="header">');
+		$mpdf->SetHTMLFooter('<img src="' .$_SERVER['DOCUMENT_ROOT'].'/meteor/css/images/doc2.png" class="footer">');
+
+		$data['count'] = 0;
+		$i = 0;
+		$a = array();
+
+		$arr = $this->participantuser_model->getDB( 'categories_questions', 'belong', '1', '', '', 0 ); 
+		foreach ($arr->result_array() as $value) {
+			$arr2 = $this->participantuser_model->getDB( 'all_questions', 'category_id', $value['id'], '', '', 0 );
+			$b = array();
+			$b['count_all'] = 0;
+			foreach($arr2->result_array() as $value2){
+				$b['ids'][] = $value2['id'];
+				$b['questions_all'][] = $value2['questions'];
+				$b['type_all'][] = $value2['type'];
+				$b['count_all']++;
+			}
+			$data['titles'][] = $value['title'];
+			$a[$i][] = $b;
+			$data['count']++;
+			$i++;
+		}
+		$data['full_array'] = $a;
+		$data['evalOrNot'] = 1;
+
+		$mpdf->WriteHTML($this->load->view('course/form_eval', $data, TRUE));
+		//$this->load->view('course/form_eval', $data);
+		$filename = 'survey_form.pdf';
+		$mpdf->Output(utf8_decode($filename),"","D");
+	}
+
+	public function dl_eval(){
+		$stylesheet1 = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/meteor/css/appearance_css.css');
+
+		$placeHeader = $_SERVER['DOCUMENT_ROOT'].'/meteor/css/images/docLogo2.png';
+		$mpdf = new mPDF('', 'LETTER', 0, 0, 0, 0, 40, 20, 0, 5,'P');
+		$mpdf->WriteHTML($stylesheet1,1);
+
+		$mpdf->SetHTMLHeader('<img src="'.$placeHeader.'" class="header">');
+		$mpdf->SetHTMLFooter('<img src="' .$_SERVER['DOCUMENT_ROOT'].'/meteor/css/images/doc2.png" class="footer">');
+
+		$data['count'] = 0;
+		$i = 0;
+		$a = array();
+
+		$arr = $this->participantuser_model->getDB( 'categories_questions', 'belong', '0', '', '', 0 ); 
+		foreach ($arr->result_array() as $value) {
+			$arr2 = $this->participantuser_model->getDB( 'all_questions', 'category_id', $value['id'], '', '', 0 );
+			$b = array();
+			$b['count_all'] = 0;
+			foreach($arr2->result_array() as $value2){
+				$b['ids'][] = $value2['id'];
+				$b['questions_all'][] = $value2['questions'];
+				$b['type_all'][] = $value2['type'];
+				$b['count_all']++;
+			}
+			$data['titles'][] = $value['title'];
+			$a[$i][] = $b;
+			$data['count']++;
+			$i++;
+		}
+		$data['full_array'] = $a;
+		$data['evalOrNot'] = 0;
+
+		$mpdf->WriteHTML($this->load->view('course/form_eval', $data, TRUE));
+		//$this->load->view('course/form_eval', $data);
+		$filename = 'evaluation_form.pdf';
+		$mpdf->Output(utf8_decode($filename),"","D");
+		//exit;
 	}
 
 	public function viewCat($message=NULL,$where=0,$manS=0,$belong=0,$err=0){

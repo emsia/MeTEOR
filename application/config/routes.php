@@ -68,6 +68,8 @@ $route['managers/(:any)'] = 'managers/view/$1';
 $route['managers/search_results'] = 'managers/search_results';
 
 $route['course/printS'] = 'course_temp/printS';
+$route['course/dl_eval'] = 'course_temp/dl_eval';
+$route['course/dl_survey'] = 'course_temp/dl_survey';
 $route['course/printEventForms'] = 'course_temp/printEventForms';
 $route['course/add'] = 'course_temp/add';
 $route['course/search_upload'] = 'course_temp/search_upload';

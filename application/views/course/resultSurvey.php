@@ -26,6 +26,17 @@
 	    $(document.body).append(form);
 	    form.submit();
 	});
+
+	$(document).on("click", ".dl_manOrNot", function () {
+    	var url = $(this).data('base');
+    	var form = $('<form></form>');
+
+    	form.attr("method", "post");
+    	form.attr("action", url);
+	    $(document.body).append(form);
+	    form.submit();
+	});
+
 </script>
 
 <div class="span9" style="margin-left: -30px">
@@ -40,6 +51,7 @@
 				<input type="hidden" name="evalOrSurvey" value="<?php echo $pili;?>" />
 				<button type="submit" name="submit" class="btn btn-large btn-success">Search</button>
 				<button type="button" class="btn btn-large btn-info manOrNot" data-belong="<?php echo $pili;?>" data-name="<?php echo $man;?>" data-base="<?php echo base_url().'index.php/course/viewCat';?>" >Question Categories</button>
+				<button type="button" class="btn btn-large btn-warning dl_manOrNot" data-toggle="tooltip" data-trigger="hover" data-placement="right" title data-original-title="Download Evaluation Form" data-base="<?php echo base_url().'index.php/course/dl_eval';?>" ><i class='glyphicon glyphicon-save'></i></button>
 			</div>
 		</div>
 
@@ -108,3 +120,12 @@
 		<?php }?>
 	</div>
 </div>
+
+<script>
+    $(function() {
+	    var tooltips = $( "[title]" ).tooltip();
+	    $(document)(function() {
+	    	tooltips.tooltip( "open" );
+	    })
+    });
+</script>
